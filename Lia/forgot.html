@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        .logo {
+            width: 150px;
+            margin: 80px auto 0;
+            display: block;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            border-style: outset;
+            border-color: green;
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: green;
+        }
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            color: #333333;
+        }
+        input[type="submit"],
+        .create-account,
+        .login {
+            background: linear-gradient(to right, green, darkgreen);
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            display: block;
+        }
+        input[type="submit"]:hover,
+        .create-account:hover,
+        .login:hover {
+            background: linear-gradient(to right, #0056b3, #003d82);
+        }
+        input[type="submit"]:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .social-icons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+        }
+        .nav-links a {
+            color: green;
+            font-size: 1rem;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            transform: scale(1.1);
+        }
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: green;
+            cursor: pointer;
+        }
+        #reset-form {
+            display: none;
+        }
+        .message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+        .message.error {
+            background-color: red;
+        }
+        .message.success {
+            background-color: green;
+        }
+        .validation-message {
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                max-width: 300px;
+                margin: 50px auto;
+                padding: 10px;
+            }
+            form {
+                order: -1;
+            }
+            input[type="email"],
+            input[type="password"],
+            input[type="submit"],
+            .create-account,
+            .login {
+                margin-bottom: 10px;
+            }
+            .nav-links {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 10px;
+                display: none;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .nav-links a {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="logo.png" alt="Logo" class="logo">
+    <button class="menu-btn" onclick="toggleMenu()">Menu</button>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="container">
+        <form id="email-form">
+            <h2>Forgot Password</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="thabisothelingoane@gmail.com" required>
+            <div id="email-validation" class="validation-message"></div>
+            <input type="submit" value="Reset Password" id="emailSubmitBtn">
+        </form>
+        <form id="reset-form">
+            <h2>Set New Password</h2>
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password" pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@]).{8,}" 
+                   title="Password must contain at least one letter, one number, and '@' symbol, & be at least 8 characters long" 
+                   required placeholder="newpassword21@">
+            <input type="submit" value="Update Password" id="resetSubmitBtn">
+        </form>
+        <div class="button-container">
+            <a href="create.html" class="create-account">Create New Account</a>
+            <a href="form.html" class="login">Login</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+                <img src="twitter.png" alt="Twitter">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank">
+                <img src="tiktok.png" alt="Tiktok">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <script>
+        function toggleMenu() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.opacity = '1';
+            setTimeout(() => messageDiv.style.opacity = '0', 3000);
+        }
+
+        function showLoading(btnId) {
+            const submitBtn = document.getElementById(btnId);
+            submitBtn.value = 'Loading...';
+            submitBtn.disabled = true;
+        }
+
+        function hideLoading(btnId, originalText) {
+            const submitBtn = document.getElementById(btnId);
+            submitBtn.value = originalText;
+            submitBtn.disabled = false;
+        }
+
+        function hashPassword(password) {
+            return btoa(password);
+        }
+
+        function updateUser(updatedUser) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    let database = JSON.parse(localStorage.getItem('database') || '[]');
+                    const userIndex = database.findIndex(u => u.email === updatedUser.email);
+                    if (userIndex !== -1) {
+                        database[userIndex] = updatedUser;
+                        localStorage.setItem('database', JSON.stringify(database));
+                    }
+                    resolve();
+                }, 500);
+            });
+        }
+
+        function getUsers() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(JSON.parse(localStorage.getItem('database') || '[]'));
+                }, 500);
+            });
+        }
+
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value;
+            getUsers().then(database => {
+                const validationDiv = document.getElementById('email-validation');
+                if (database.some(u => u.email === email)) {
+                    validationDiv.textContent = 'Email found';
+                    validationDiv.style.color = 'green';
+                    this.style.borderColor = 'green';
+                } else {
+                    validationDiv.textContent = 'Email not registered';
+                    validationDiv.style.color = 'red';
+                    this.style.borderColor = 'red';
+                }
+            });
+        });
+
+        const emailForm = document.getElementById('email-form');
+        const resetForm = document.getElementById('reset-form');
+        let resetEmail = '';
+
+        emailForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showLoading('emailSubmitBtn');
+
+            const email = document.getElementById('email').value;
+            getUsers().then(database => {
+                const user = database.find(u => u.email === email);
+                hideLoading('emailSubmitBtn', 'Reset Password');
+                if (user) {
+                    resetEmail = email;
+                    showMessage('Email verified! Please set your new password.', 'success');
+                    emailForm.style.display = 'none';
+                    resetForm.style.display = 'block';
+                } else {
+                    showMessage('Email not found in our database!', 'error');
+                }
+            });
+        });
+
+        resetForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showLoading('resetSubmitBtn');
+
+            const newPassword = hashPassword(document.getElementById('new-password').value);
+            getUsers().then(database => {
+                const userIndex = database.findIndex(u => u.email === resetEmail);
+                if (userIndex !== -1) {
+                    const updatedUser = { ...database[userIndex], password: newPassword };
+                    updateUser(updatedUser).then(() => {
+                        const txtFormat = `Name: ${updatedUser.name}, Surname: ${updatedUser.surname}, Email: ${updatedUser.email}, Phone: ${updatedUser.number}, Password: [hashed]\n`;
+                        console.log('Updated database.txt entry:', txtFormat);
+                        hideLoading('resetSubmitBtn', 'Update Password');
+                        showMessage('Password updated successfully!', 'success');
+                        setTimeout(() => window.location.href = 'form.html', 1000);
+                    });
+                } else {
+                    hideLoading('resetSubmitBtn', 'Update Password');
+                    showMessage('Error updating password. Please try again.', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

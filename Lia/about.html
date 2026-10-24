@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Lesotho Ideal Accommodations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --dark-green: #1E5631;
+            --light-green: green;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --text-dark: #333333;
+            --text-light: black;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .about-section {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .about-section h2 {
+            color: var(--dark-green);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .about-section p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .team-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            gap: 60px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            width: 350px;
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--primary-green);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: scale(1.09);
+        }
+        
+        .team-member img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--light-green);
+            margin: 0 auto 20px;
+        }
+        
+        .team-member h3 {
+            margin: 15px 0 5px;
+            color: var(--dark-green);
+            font-size: 1.3rem;
+        }
+        
+        .team-member p {
+            color: var(--text-light);
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+        
+        .team-member p.role {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .team-member p.email {
+            color: var(--dark-green);
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .home-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-link:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-link i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 30px 15px;
+                padding: 20px;
+            }
+            
+            .team-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .home-link {
+                top: 10px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="about-section">
+            <h2>About Us</h2>
+            <p>
+                Lesotho Ideal Accommodations is your trusted destination for premium rental solutions in Lesotho. With a focus on excellence and customer satisfaction, we offer a diverse range of rental properties and services tailored to meet your residential and commercial needs. Whether you're searching for a modern apartment, a spacious office space, or specialized equipment, we provide reliable and efficient solutions to fulfill your requirements.
+            </p>
+        </div>
+        
+        <div class="team-section">
+            <div class="team-member">
+                <img src="realme.jpg" alt="Thabiso Thelingoane">
+                <h3>Thabiso Thelingoane</h3>
+                <p class="role">Software Engineer</p>
+                <p>CyberSec & Ml Analyst</p>
+                <p>Quantitative Analyst</p>
+                <p>Mathematician</p>
+                <p class="email">thabisothelingoane345@gmail.com</p>
+            </div>
+            
+            <div class="team-member">
+                <img src="bafana.jpg" alt="Fani Maphasa">
+                <h3>Fani Maphasa</h3>
+                <p class="role">Graphic Designer</p>
+                <p>Brand Identity Designer</p>
+                <p>Multimedia Artist</p>
+                <p>UX Designer</p>
+                <p class="email">maphasafani301@gmail.com</p>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="home.html" class="home-link">
+        <i class="fas fa-home"></i> Home
+    </a>
+</body>
+</html>

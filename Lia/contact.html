@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Lesotho Ideal Accommodations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: green;
+            --dark-green: #1E5631;
+            --light-green: #A4DEA4;
+            --lighter-green: #E8F5E9;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --error-red: #E74C3C;
+            --success-green: #2ECC71;
+            --warning-yellow: #F39C12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--off-white);
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--dark-green);
+            color: white;
+            padding: 8px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        header h1 {
+            color: green;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white);
+            background-color: var(--primary-green);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        main {
+            padding: 40px 20px;
+        }
+        
+        #main-content {
+            outline: none;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info-section, 
+        .contact-form-section {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: var(--dark-green);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .logo-img {
+            max-width: 250px;
+            height: auto;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-right: 20px;
+            width: 30px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .contact-item-content h3 {
+            margin: 0 0 5px 0;
+            color: var(--dark-green);
+            font-size: 1.1rem;
+        }
+        
+        .contact-item-content p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .map-container {
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            height: 200px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-3px);
+        }
+        
+        .live-support {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: var(--lighter-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .live-support i {
+            font-size: 1.2rem;
+            color: var(--primary-green);
+            margin-right: 15px;
+        }
+        
+        .live-support.online {
+            border-left: 4px solid var(--success-green);
+        }
+        
+        .live-support.offline {
+            border-left: 4px solid var(--text-light);
+        }
+        
+        .live-support-text h4 {
+            color: var(--dark-green);
+            margin-bottom: 5px;
+        }
+        
+        .live-support-text p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-green);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--off-white);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+            background-color: var(--white);
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .input-error {
+            border-color: var(--error-red) !important;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2) !important;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-group label a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+        
+        .file-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .file-input-label {
+            display: block;
+            padding: 12px 15px;
+            background-color: var(--off-white);
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background-color: var(--lighter-green);
+            border-color: var(--primary-green);
+        }
+        
+        .file-input {
+            position: absolute;
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .file-name {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .btn {
+            position: relative;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:disabled {
+            background-color: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .btn-loading .btn-text {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        .btn-loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 3px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .status-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+        }
+        
+        .status-message.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-green);
+            border: 1px solid var(--success-green);
+            display: block;
+        }
+        
+        .status-message.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--error-red);
+            border: 1px solid var(--error-red);
+            display: block;
+        }
+        
+        .status-message.warning {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-yellow);
+            border: 1px solid var(--warning-yellow);
+            display: block;
+        }
+        
+        .char-counter {
+            display: block;
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+        
+        .char-counter.warning {
+            color: var(--warning-yellow);
+        }
+        
+        .char-counter.error {
+            color: var(--error-red);
+        }
+        
+        .faq-section {
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 15px;
+            background-color: var(--lighter-green);
+            color: var(--dark-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: var(--light-green);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            background-color: var(--white);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer.show {
+            padding: 15px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-green);
+        }
+        
+        .footer-column ul {
+            list-style-type: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info-section, 
+            .contact-form-section {
+                padding: 30px 20px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header>
+        <div class="header-container">
+            <h1>Contact Us</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="create.html"><i class="fas fa-user-plus"></i> Create Account</a></li>
+                    <li><a href="form.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main id="main-content" tabindex="-1">
+        <div class="main-container">
+            <section class="contact-info-section">
+                <h2 class="section-title">Our Information</h2>
+                
+                <div class="logo-container">
+                    <img src="logo.png" alt="Lesotho Ideal Accommodations Logo" class="logo-img">
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-item-content">
+                            <h3>Email</h3>
+                            <p>lesothorentals@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-item-content">
+                            <h3>Phone</h3>
+                            <p>+266 57811397</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-item-content">
+                            <h3>Address</h3>
+                            <p>Ha-Leqele, Maseru 100, Lesotho</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-item-content">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                            <p>Saturday: 9:00 AM - 1:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <div class="contact-item-content">
+                            <h3>Our Location</h3>
+                            <div class="map-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.772292370234!2d27.483333!3d-29.316667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDE5JzAwLjAiUyAyN8KwMjknMDAuMCJF!5e0!3m2!1sen!2sls!4v1234567890123!5m2!1sen!2sls" 
+                                        width="600" 
+                                        height="450" 
+                                        style="border:0;" 
+                                        allowfullscreen="" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="live-support online">
+                    <i class="fas fa-headset"></i>
+                    <div class="live-support-text">
+                        <h4>Live Support Available</h4>
+                        <p>Our team is online now to help you</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                
+                <div class="faq-section">
+                    <h3 class="section-title">FAQs</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What are your rental requirements?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We require a valid ID, proof of income, and a security deposit equal to one month's rent. Some properties may have additional requirements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long does the approval process take?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Typically 1-2 business days after we receive all required documents. We'll notify you immediately once approved.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you offer short-term rentals?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer flexible rental terms starting from 1 month. Rates may vary based on rental duration.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="contact-form-section">
+                <h2 class="section-title">Send Us a Message</h2>
+                <div id="statusMessage" class="status-message"></div>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="booking">Booking Information</option>
+                            <option value="support">Customer Support</option>
+                            <option value="feedback">Feedback/Suggestions</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priority">Priority Level</label>
+                        <select id="priority" name="priority">
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent (24hr response)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" required maxlength="500"></textarea>
+                        <small id="charCounter" class="char-counter">0/500 characters</small>
+                    </div>
+                    
+                    <div class="file-input-container">
+                        <label for="attachment" class="file-input-label">
+                            <i class="fas fa-paperclip"></i> Attach Files (Optional)
+                        </label>
+                        <input type="file" id="attachment" name="attachment" class="file-input" multiple>
+                        <div id="fileName" class="file-name"></div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">Subscribe to our newsletter for updates and offers</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">I agree to the <a href="privacy.html">privacy policy</a> and terms of service *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <span class="btn-text">Send Message</span>
+                    </button>
+                </form>
+                
+                <div class="suggested-articles" style="margin-top: 30px;">
+                    <h3 style="color: var(--dark-green); font-size: 1.2rem; margin-bottom: 15px;">Helpful Articles</h3>
+                    <ul style="list-style-type: none;">
+                        <li style="margin-bottom: 10px;">
+                            <a href="#" style="color: var(--primary-green); text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-file-alt" style="margin-right: 8px;"></i> How to prepare for your rental application
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <a href="#" style="color: var(--primary-green); text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-file-alt" style="margin-right: 8px;"></i> Understanding rental agreements
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <a href="#" style="color: var(--primary-green); text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-file-alt" style="margin-right: 8px;"></i> Payment methods we accept
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="properties.html">Our Properties</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="residential.html">Residential Rentals</a></li>
+                        <li><a href="commercial.html">Commercial Spaces</a></li>
+                        <li><a href="vacation.html">Vacation Homes</a></li>
+                        <li><a href="property-management.html">Property Management</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Lesotho Ideal Accommodations. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const contactForm = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('statusMessage');
+        const charCounter = document.getElementById('charCounter');
+        const messageInput = document.getElementById('message');
+        const fileInput = document.getElementById('attachment');
+        const fileNameDisplay = document.getElementById('fileName');
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        // Form submission handler
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const btnText = btn.innerHTML;
+            btn.disabled = true;
+            btn.classList.add('btn-loading');
+            btn.innerHTML = '<span class="btn-text">' + btnText + '</span>';
+            
+            // Validate form
+            if (!validateForm()) {
+                btn.disabled = false;
+                btn.classList.remove('btn-loading');
+                btn.innerHTML = btnText;
+                return;
+            }
+            
+            // Simulate form submission (replace with actual fetch in production)
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                showStatusMessage('Thank you! Your message has been sent successfully. We will respond within 24 hours.', 'success');
+                
+                // Track conversion (example for Google Analytics)
+                if (window.gtag) {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-123456789/AbCdEfGhIjKl',
+                        'event_callback': function() {
+                            console.log('Conversion tracked');
+                        }
+                    });
+                }
+                
+                // Reset form
+                this.reset();
+                charCounter.textContent = '0/500 characters';
+                fileNameDisplay.textContent = '';
+                
+            } catch (error) {
+                showStatusMessage('An error occurred while sending your message. Please try again later.', 'error');
+                console.error('Form submission error:', error);
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('btn-loading');
+                btn.innerHTML = btnText;
+            }
+        });
+        
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            
+            // Validate name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('name').classList.add('input-error');
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            if (!email || !validateEmail(email)) {
+                document.getElementById('email').classList.add('input-error');
+                showStatusMessage('Please enter a valid email address.', 'error');
+                isValid = false;
+            }
+            
+            // Validate subject
+            const subject = document.getElementById('subject').value;
+            if (!subject) {
+                document.getElementById('subject').classList.add('input-error');
+                isValid = false;
+            }
+            
+            // Validate message
+            const message = document.getElementById('message').value.trim();
+            if (!message) {
+                document.getElementById('message').classList.add('input-error');
+                isValid = false;
+            }
+            
+            // Validate privacy checkbox
+            const privacyChecked = document.getElementById('privacy').checked;
+            if (!privacyChecked) {
+                showStatusMessage('You must agree to the privacy policy.', 'error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Email validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Show status message
+        function showStatusMessage(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = 'status-message ' + type;
+            statusMessage.style.display = 'block';
+            
+            // Scroll to message
+            statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Character counter for message
+        messageInput.addEventListener('input', function() {
+            const length = this.value.length;
+            charCounter.textContent = `${length}/500 characters`;
+            
+            if (length > 450) {
+                charCounter.classList.add('warning');
+                charCounter.classList.remove('error');
+            } else if (length >= 500) {
+                charCounter.classList.add('error');
+                charCounter.classList.remove('warning');
+            } else {
+                charCounter.classList.remove('warning', 'error');
+            }
+        });
+        
+        // File input handler
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                let names = [];
+                for (let i = 0; i < this.files.length; i++) {
+                    names.push(this.files[i].name);
+                }
+                fileNameDisplay.textContent = names.join(', ');
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        });
+        
+        // FAQ toggle functionality
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                answer.classList.toggle('show');
+                
+                // Close other open FAQs
+                faqQuestions.forEach(q => {
+                    if (q !== this && q.classList.contains('active')) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('show');
+                    }
+                });
+            });
+        });
+        
+        // Input validation on blur
+        document.getElementById('email').addEventListener('blur', function() {
+            if (this.value && !validateEmail(this.value)) {
+                this.classList.add('input-error');
+                showStatusMessage('Please enter a valid email address', 'error');
+            } else {
+                this.classList.remove('input-error');
+            }
+        });
+        
+        // Remove error class when user starts typing
+        const formInputs = document.querySelectorAll('.contact-form input, .contact-form textarea, .contact-form select');
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.classList.contains('input-error')) {
+                    this.classList.remove('input-error');
+                }
+            });
+        });
+        
+        // Live chat simulation
+        const liveSupport = document.querySelector('.live-support');
+        let isOnline = true;
+        
+        // Simulate support availability changes
+        setInterval(() => {
+            isOnline = !isOnline;
+            if (isOnline) {
+                liveSupport.classList.remove('offline');
+                liveSupport.classList.add('online');
+                liveSupport.querySelector('h4').textContent = 'Live Support Available';
+                liveSupport.querySelector('p').textContent = 'Our team is online now to help you';
+            } else {
+                liveSupport.classList.remove('online');
+                liveSupport.classList.add('offline');
+                liveSupport.querySelector('h4').textContent = 'Live Support Offline';
+                liveSupport.querySelector('p').textContent = 'Leave a message and we\'ll get back to you';
+            }
+        }, 30000); // Change every 30 seconds for demo
+    </script>
+</body>
+</html>

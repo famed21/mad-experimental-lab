@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 80px auto 100px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: green;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            color: green;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            color: #333333;
+        }
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #999999;
+        }
+        input[type="submit"],
+        .forgot-password,
+        .create-account {
+            background: linear-gradient(to right, green, darkgreen);
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            display: block;
+        }
+        input[type="submit"]:hover,
+        .forgot-password:hover,
+        .create-account:hover {
+            background: linear-gradient(to right, #007bff, #0056b3);
+        }
+        input[type="submit"]:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+        }
+        .nav-links a {
+            color: green;
+            font-size: 1rem;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            transform: scale(1.1);
+        }
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: green;
+            cursor: pointer;
+        }
+        .message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+        .message.error {
+            background-color: red;
+        }
+        .message.success {
+            background-color: green;
+        }
+        .validation-message {
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .logo {
+            width: 150px;
+            margin: 80px auto 0;
+            display: block;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+        @media screen and (max-width: 768px) {
+            .container {
+                max-width: 300px;
+                margin: 80px auto 100px;
+                padding: 15px;
+                border-radius: 8px;
+            }
+            .nav-links {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 10px;
+                display: none;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .nav-links a {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-btn" onclick="toggleMenu()">Menu</button>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <div class="container">
+        <form id="loginForm">
+            <h2>Hello, Welcome!</h2>
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="username" placeholder="thabisothelingoane@gmail.com" required>
+            <div id="email-validation" class="validation-message"></div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="famed21@" required>
+            <input type="submit" value="Login" id="submitBtn">
+            <div class="button-container">
+                <a href="forgot.html" class="forgot-password">Forgot Password?</a>
+                <a href="create.html" class="create-account">Create New Account</a>
+            </div>
+        </form>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+                <img src="twitter.png" alt="Twitter">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank">
+                <img src="tiktok.png" alt="Tiktok">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <script>
+        function toggleMenu() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.opacity = '1';
+            setTimeout(() => messageDiv.style.opacity = '0', 3000);
+        }
+
+        function showLoading() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.value = 'Loading...';
+            submitBtn.disabled = true;
+        }
+
+        function hideLoading() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.value = 'Login';
+            submitBtn.disabled = false;
+        }
+
+        function hashPassword(password) {
+            return btoa(password);
+        }
+
+        function unhashPassword(hashed) {
+            return atob(hashed);
+        }
+
+        function getUsers() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(JSON.parse(localStorage.getItem('database') || '[]'));
+                }, 500);
+            });
+        }
+
+        document.getElementById('username').addEventListener('input', function() {
+            const email = this.value;
+            getUsers().then(database => {
+                const validationDiv = document.getElementById('email-validation');
+                if (database.some(u => u.email === email)) {
+                    validationDiv.textContent = 'Email found';
+                    validationDiv.style.color = 'green';
+                    this.style.borderColor = 'green';
+                } else {
+                    validationDiv.textContent = 'Email not registered';
+                    validationDiv.style.color = 'red';
+                    this.style.borderColor = 'red';
+                }
+            });
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showLoading();
+
+            const email = document.getElementById('username').value;
+            const password = hashPassword(document.getElementById('password').value);
+
+            getUsers().then(database => {
+                const user = database.find(u => u.email === email && u.password === password);
+                hideLoading();
+                if (user) {
+                    showMessage(`Kena ka kgotso, ${user.name} ${user.surname}!`, 'success');
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    setTimeout(() => window.location.href = 'accommodations.html', 1000);
+                } else {
+                    showMessage('Invalid email or password!', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

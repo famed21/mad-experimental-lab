@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Lesotho Ideal Accommodations</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a6b1a;
+            --secondary-color: #0d4d0d;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .table-responsive {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .amenity-tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .property-image-preview {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .stats-card h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stats-card p {
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .toggle-sidebar {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1050;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        
+        .bulk-actions {
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #dee2e6;
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .shortcut-key {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            border: 1px solid #ced4da;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            .sidebar.show {
+                margin-left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .toggle-sidebar {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toggle Sidebar Button (Mobile) -->
+    <button class="toggle-sidebar" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="position-sticky pt-3">
+            <div class="text-center mb-4 mt-3">
+                <img src="logo.png" alt="Logo" style="height: 50px;">
+                <h4 class="mt-2">Admin Dashboard</h4>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#dashboard" data-bs-toggle="tab">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard <span class="shortcut-key">D</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#properties" data-bs-toggle="tab">
+                        <i class="fas fa-home"></i> Properties <span class="shortcut-key">P</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#bookings" data-bs-toggle="tab">
+                        <i class="fas fa-calendar-check"></i> Bookings <span class="shortcut-key">B</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reviews" data-bs-toggle="tab">
+                        <i class="fas fa-star"></i> Reviews <span class="shortcut-key">R</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#users" data-bs-toggle="tab">
+                        <i class="fas fa-users"></i> Users <span class="shortcut-key">U</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a class="nav-link" href="#" id="logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout <span class="shortcut-key">L</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-pane fade show active" id="dashboard">
+                <h2 class="mb-4">Dashboard Overview</h2>
+                
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card stats-card">
+                            <h2 id="totalProperties">0</h2>
+                            <p>Total Properties</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stats-card">
+                            <h2 id="activeBookings">0</h2>
+                            <p>Active Bookings</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stats-card">
+                            <h2 id="totalRevenue">0</h2>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stats-card">
+                            <h2 id="avgRating">0.0</h2>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Recent Bookings
+                                <button class="btn btn-sm btn-outline-secondary" id="refreshBookingsChart">
+                                    <i class="fas fa-sync-alt"></i> Refresh
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="bookingsChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Property Types
+                            </div>
+                            <div class="card-body">
+                                <canvas id="propertyTypesChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Monthly Revenue
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-secondary" id="exportRevenueData">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" id="refreshRevenueChart">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="revenueChart" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Properties Tab -->
+            <div class="tab-pane fade" id="properties">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Property Management</h2>
+                    <div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+                            <i class="fas fa-plus"></i> Add New Property
+                        </button>
+                        <button class="btn btn-outline-secondary ms-2" id="exportProperties">
+                            <i class="fas fa-file-export"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bulk-actions" id="propertiesBulkActions">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-danger" id="bulkDeleteProperties">
+                            <i class="fas fa-trash"></i> Delete Selected
+                        </button>
+                        <button class="btn btn-outline-secondary" id="clearSelection">
+                            Clear Selection
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="loading-spinner" id="propertiesLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading properties...</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover" id="propertiesTable">
+                        <thead>
+                            <tr>
+                                <th width="30px"><input type="checkbox" id="selectAllProperties"></th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="propertiesEmptyState" style="display: none;">
+                    <i class="fas fa-home"></i>
+                    <h4>No Properties Found</h4>
+                    <p>You haven't added any properties yet. Click the "Add New Property" button to get started.</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+                        <i class="fas fa-plus"></i> Add Property
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Bookings Tab -->
+            <div class="tab-pane fade" id="bookings">
+                <h2 class="mb-4">Booking Management</h2>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary active filter-booking" data-status="all">All</button>
+                        <button class="btn btn-outline-primary filter-booking" data-status="confirmed">Confirmed</button>
+                        <button class="btn btn-outline-primary filter-booking" data-status="pending">Pending</button>
+                        <button class="btn btn-outline-primary filter-booking" data-status="cancelled">Cancelled</button>
+                    </div>
+                    <button class="btn btn-outline-secondary" id="exportBookings">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+                
+                <div class="loading-spinner" id="bookingsLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading bookings...</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover" id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Property</th>
+                                <th>Dates</th>
+                                <th>Guest</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="bookingsEmptyState" style="display: none;">
+                    <i class="fas fa-calendar"></i>
+                    <h4>No Bookings Found</h4>
+                    <p>There are no bookings to display at this time.</p>
+                </div>
+            </div>
+            
+            <!-- Reviews Tab -->
+            <div class="tab-pane fade" id="reviews">
+                <h2 class="mb-4">Review Management</h2>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary active filter-review" data-rating="all">All</button>
+                        <button class="btn btn-outline-primary filter-review" data-rating="5">5 Stars</button>
+                        <button class="btn btn-outline-primary filter-review" data-rating="4">4 Stars</button>
+                        <button class="btn btn-outline-primary filter-review" data-rating="3">3 Stars</button>
+                        <button class="btn btn-outline-primary filter-review" data-rating="2">2 Stars</button>
+                        <button class="btn btn-outline-primary filter-review" data-rating="1">1 Star</button>
+                    </div>
+                    <button class="btn btn-outline-secondary" id="exportReviews">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+                
+                <div class="loading-spinner" id="reviewsLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading reviews...</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover" id="reviewsTable">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>User</th>
+                                <th>Rating</th>
+                                <th>Review</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="reviewsEmptyState" style="display: none;">
+                    <i class="fas fa-star"></i>
+                    <h4>No Reviews Found</h4>
+                    <p>There are no reviews to display at this time.</p>
+                </div>
+            </div>
+            
+            <!-- Users Tab -->
+            <div class="tab-pane fade" id="users">
+                <h2 class="mb-4">User Management</h2>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="input-group" style="width: 300px;">
+                        <input type="text" class="form-control" placeholder="Search users..." id="userSearch">
+                        <button class="btn btn-outline-secondary" type="button" id="searchUsersBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-outline-secondary" id="exportUsers">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+                
+                <div class="loading-spinner" id="usersLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading users...</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Bookings</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="usersEmptyState" style="display: none;">
+                    <i class="fas fa-users"></i>
+                    <h4>No Users Found</h4>
+                    <p>There are no users to display at this time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div class="modal fade" id="addPropertyModal" tabindex="-1" aria-labelledby="addPropertyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPropertyModalLabel">Add New Property</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPropertyForm">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyName" class="form-label">Property Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="propertyName" required>
+                                    <div class="invalid-feedback">Please provide a property name.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyLocation" class="form-label">Location <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="propertyLocation" required>
+                                    <div class="invalid-feedback">Please provide a location.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyType" class="form-label">Type <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="propertyType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Apartment">Apartment</option>
+                                        <option value="House">House</option>
+                                        <option value="Cottage">Cottage</option>
+                                        <option value="Loft">Loft</option>
+                                        <option value="Suite">Suite</option>
+                                        <option value="Sesotho Hut">Traditional Sesotho Hut</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a property type.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyPrice" class="form-label">Price (M) <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="propertyPrice" min="0" required>
+                                    <div class="invalid-feedback">Please provide a valid price.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyOriginalPrice" class="form-label">Original Price (M) - for discounts</label>
+                                    <input type="number" class="form-control" id="propertyOriginalPrice" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyBedrooms" class="form-label">Bedrooms <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="propertyBedrooms" min="1" required>
+                                    <div class="invalid-feedback">Please provide the number of bedrooms.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyBathrooms" class="form-label">Bathrooms <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="propertyBathrooms" min="1" required>
+                                    <div class="invalid-feedback">Please provide the number of bathrooms.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Amenities</label>
+                                    <div class="amenities-checkboxes">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="amenityWifi" value="wifi">
+                                            <label class="form-check-label" for="amenityWifi">WiFi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="amenityParking" value="parking">
+                                            <label class="form-check-label" for="amenityParking">Parking</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="amenityPool" value="pool">
+                                            <label class="form-check-label" for="amenityPool">Pool</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="amenityKitchen" value="kitchen">
+                                            <label class="form-check-label" for="amenityKitchen">Kitchen</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="propertyImage" class="form-label">Property Image <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" id="propertyImage" accept="image/*" required>
+                                    <div class="invalid-feedback">Please upload a property image.</div>
+                                    <img id="propertyImagePreview" class="property-image-preview mt-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="propertyDescription" class="form-label">Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="propertyDescription" rows="3" required></textarea>
+                                    <div class="invalid-feedback">Please provide a description.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyLatitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="propertyLatitude">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyLongitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="propertyLongitude">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Property Status</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="propertyIsNew">
+                                <label class="form-check-label" for="propertyIsNew">Mark as New</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="propertyIsPopular">
+                                <label class="form-check-label" for="propertyIsPopular">Mark as Popular</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="propertyHighlights" class="form-label">Highlights (one per line)</label>
+                            <textarea class="form-control" id="propertyHighlights" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="savePropertyBtn">
+                        <span class="spinner-border spinner-border-sm" id="savePropertySpinner" style="display: none;"></span>
+                        Save Property
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Property Modal -->
+    <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPropertyModalLabel">Edit Property</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPropertyForm">
+                        <input type="hidden" id="editPropertyId">
+                        <input type="hidden" id="editCsrfToken" name="csrfToken" value="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editPropertyName" class="form-label">Property Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="editPropertyName" required>
+                                    <div class="invalid-feedback">Please provide a property name.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyLocation" class="form-label">Location <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="editPropertyLocation" required>
+                                    <div class="invalid-feedback">Please provide a location.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyType" class="form-label">Type <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="editPropertyType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Apartment">Apartment</option>
+                                        <option value="House">House</option>
+                                        <option value="Cottage">Cottage</option>
+                                        <option value="Loft">Loft</option>
+                                        <option value="Suite">Suite</option>
+                                        <option value="Sesotho Hut">Traditional Sesotho Hut</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a property type.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyPrice" class="form-label">Price (M) <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="editPropertyPrice" min="0" required>
+                                    <div class="invalid-feedback">Please provide a valid price.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyOriginalPrice" class="form-label">Original Price (M) - for discounts</label>
+                                    <input type="number" class="form-control" id="editPropertyOriginalPrice" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editPropertyBedrooms" class="form-label">Bedrooms <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="editPropertyBedrooms" min="1" required>
+                                    <div class="invalid-feedback">Please provide the number of bedrooms.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyBathrooms" class="form-label">Bathrooms <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="editPropertyBathrooms" min="1" required>
+                                    <div class="invalid-feedback">Please provide the number of bathrooms.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Amenities</label>
+                                    <div class="amenities-checkboxes">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="editAmenityWifi" value="wifi">
+                                            <label class="form-check-label" for="editAmenityWifi">WiFi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="editAmenityParking" value="parking">
+                                            <label class="form-check-label" for="editAmenityParking">Parking</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="editAmenityPool" value="pool">
+                                            <label class="form-check-label" for="editAmenityPool">Pool</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="editAmenityKitchen" value="kitchen">
+                                            <label class="form-check-label" for="editAmenityKitchen">Kitchen</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPropertyImage" class="form-label">Property Image</label>
+                                    <input type="file" class="form-control" id="editPropertyImage" accept="image/*">
+                                    <img id="editPropertyImagePreview" class="property-image-preview mt-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="editPropertyDescription" class="form-label">Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="editPropertyDescription" rows="3" required></textarea>
+                                    <div class="invalid-feedback">Please provide a description.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editPropertyLatitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="editPropertyLatitude">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editPropertyLongitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="editPropertyLongitude">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Property Status</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="editPropertyIsNew">
+                                <label class="form-check-label" for="editPropertyIsNew">Mark as New</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="editPropertyIsPopular">
+                                <label class="form-check-label" for="editPropertyIsPopular">Mark as Popular</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPropertyHighlights" class="form-label">Highlights (one per line)</label>
+                            <textarea class="form-control" id="editPropertyHighlights" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="updatePropertyBtn">
+                        <span class="spinner-border spinner-border-sm" id="updatePropertySpinner" style="display: none;"></span>
+                        Update Property
+                    </button>
+                    <button type="button" class="btn btn-danger" id="deletePropertyBtn">
+                        <span class="spinner-border spinner-border-sm" id="deletePropertySpinner" style="display: none;"></span>
+                        Delete Property
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Booking Modal -->
+    <div class="modal fade" id="viewBookingModal" tabindex="-1" aria-labelledby="viewBookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewBookingModalLabel">Booking Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Booking details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="printBookingBtn">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Review Modal -->
+    <div class="modal fade" id="viewReviewModal" tabindex="-1" aria-labelledby="viewReviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewReviewModalLabel">Review Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Review details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View User Modal -->
+    <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby="viewUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewUserModalLabel">User Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- User details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="resetPasswordBtn">
+                        <i class="fas fa-key"></i> Reset Password
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script>
+        // Admin Dashboard Application
+        const AdminApp = {
+            // Initialize the application
+            init() {
+                this.checkAuthentication();
+                this.initComponents();
+                this.bindEvents();
+                this.generateCSRFToken();
+                this.loadKeyboardShortcuts();
+                this.loadPropertiesTable();
+                this.loadBookingsTable();
+                this.loadReviewsTable();
+                this.loadUsersTable();
+            },
+            
+            // Check if user is authenticated
+            checkAuthentication() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (!currentUser || !currentUser.isAdmin) {
+                    this.showToast('You must be logged in as admin to access this page', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 2000);
+                    return false;
+                }
+                return true;
+            },
+            
+            // Generate CSRF token for form submissions
+            generateCSRFToken() {
+                const token = this.generateRandomString(32);
+                document.getElementById('csrfToken').value = token;
+                document.getElementById('editCsrfToken').value = token;
+                return token;
+            },
+            
+            // Generate random string for tokens
+            generateRandomString(length) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            },
+            
+            // Initialize components
+            initComponents() {
+                this.initSidebar();
+                this.initDataTables();
+                this.loadDashboardData();
+                this.initCharts();
+            },
+            
+            // Initialize sidebar functionality
+            initSidebar() {
+                const toggleBtn = document.getElementById('toggleSidebar');
+                const sidebar = document.getElementById('sidebar');
+                const mainContent = document.getElementById('mainContent');
+
+                toggleBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    mainContent.classList.toggle('show');
+                });
+
+                // Close sidebar when clicking on a nav link (mobile)
+                document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 768) {
+                            sidebar.classList.remove('show');
+                            mainContent.classList.remove('show');
+                        }
+                    });
+                });
+            },
+            
+            // Initialize DataTables
+            initDataTables() {
+                $('#propertiesTable').DataTable({
+                    responsive: true,
+                    searching: true,
+                    paging: true,
+                    info: true,
+                    order: [[2, 'asc']],
+                    language: {
+                        emptyTable: "No properties available",
+                        info: "Showing _START_ to _END_ of _TOTAL_ properties",
+                        infoEmpty: "Showing 0 to 0 of 0 properties",
+                        search: "_INPUT_",
+                        searchPlaceholder: "Search properties..."
+                    }
+                });
+                
+                $('#bookingsTable').DataTable({
+                    responsive: true,
+                    searching: true,
+                    paging: true,
+                    info: true,
+                    order: [[0, 'desc']],
+                    language: {
+                        emptyTable: "No bookings available",
+                        info: "Showing _START_ to _END_ of _TOTAL_ bookings",
+                        infoEmpty: "Showing 0 to 0 of 0 bookings",
+                        search: "_INPUT_",
+                        searchPlaceholder: "Search bookings..."
+                    }
+                });
+                
+                $('#reviewsTable').DataTable({
+                    responsive: true,
+                    searching: true,
+                    paging: true,
+                    info: true,
+                    order: [[4, 'desc']],
+                    language: {
+                        emptyTable: "No reviews available",
+                        info: "Showing _START_ to _END_ of _TOTAL_ reviews",
+                        infoEmpty: "Showing 0 to 0 of 0 reviews",
+                        search: "_INPUT_",
+                        searchPlaceholder: "Search reviews..."
+                    }
+                });
+                
+                $('#usersTable').DataTable({
+                    responsive: true,
+                    searching: true,
+                    paging: true,
+                    info: true,
+                    order: [[4, 'desc']],
+                    language: {
+                        emptyTable: "No users available",
+                        info: "Showing _START_ to _END_ of _TOTAL_ users",
+                        infoEmpty: "Showing 0 to 0 of 0 users",
+                        search: "_INPUT_",
+                        searchPlaceholder: "Search users..."
+                    }
+                });
+            },
+            
+            // Load dashboard data
+            loadDashboardData() {
+                const properties = JSON.parse(localStorage.getItem('accommodations')) || [];
+                const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                
+                document.getElementById('totalProperties').textContent = properties.length;
+                document.getElementById('activeBookings').textContent = bookings.length;
+                
+                const totalRevenue = bookings.reduce((sum, booking) => sum + (booking.price || 0), 0);
+                document.getElementById('totalRevenue').textContent = 'M' + totalRevenue.toLocaleString();
+                
+                const avgRating = reviews.length > 0 ? 
+                    (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
+                document.getElementById('avgRating').textContent = avgRating.toFixed(1);
+            },
+            
+            // Initialize charts
+            initCharts() {
+                this.initBookingsChart();
+                this.initPropertyTypesChart();
+                this.initRevenueChart();
+            },
+            
+            // Initialize bookings chart
+            initBookingsChart() {
+                const bookingsCtx = document.getElementById('bookingsChart').getContext('2d');
+                this.bookingsChart = new Chart(bookingsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Bookings',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: 'rgba(26, 107, 26, 0.7)',
+                            borderColor: 'rgba(26, 107, 26, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            },
+            
+            // Initialize property types chart
+            initPropertyTypesChart() {
+                const typesCtx = document.getElementById('propertyTypesChart').getContext('2d');
+                const properties = JSON.parse(localStorage.getItem('accommodations')) || [];
+                const propertyTypes = {};
+                
+                properties.forEach(property => {
+                    propertyTypes[property.type] = (propertyTypes[property.type] || 0) + 1;
+                });
+                
+                this.propertyTypesChart = new Chart(typesCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(propertyTypes),
+                        datasets: [{
+                            data: Object.values(propertyTypes),
+                            backgroundColor: [
+                                'rgba(26, 107, 26, 0.7)',
+                                'rgba(13, 77, 13, 0.7)',
+                                'rgba(255, 107, 0, 0.7)',
+                                'rgba(255, 69, 0, 0.7)',
+                                'rgba(0, 107, 26, 0.7)',
+                                'rgba(0, 69, 13, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            },
+            
+            // Initialize revenue chart
+            initRevenueChart() {
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                this.revenueChart = new Chart(revenueCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Revenue (M)',
+                            data: [12000, 19000, 3000, 5000, 2000, 3000],
+                            backgroundColor: 'rgba(26, 107, 26, 0.2)',
+                            borderColor: 'rgba(26, 107, 26, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            },
+            
+            // Bind event listeners
+            bindEvents() {
+                // Navigation
+                document.getElementById('logout').addEventListener('click', () => this.logout());
+                
+                // Property management
+                document.getElementById('savePropertyBtn').addEventListener('click', () => this.saveProperty());
+                document.getElementById('updatePropertyBtn').addEventListener('click', () => this.updateProperty());
+                document.getElementById('deletePropertyBtn').addEventListener('click', () => this.confirmDeleteProperty());
+                document.getElementById('propertyImage').addEventListener('change', (e) => this.previewPropertyImage(e));
+                document.getElementById('editPropertyImage').addEventListener('change', (e) => this.previewEditPropertyImage(e));
+                document.getElementById('exportProperties').addEventListener('click', () => this.exportToCSV('accommodations'));
+                
+                // Bulk actions
+                document.getElementById('selectAllProperties').addEventListener('change', (e) => this.toggleSelectAllProperties(e));
+                document.getElementById('bulkDeleteProperties').addEventListener('click', () => this.bulkDeleteProperties());
+                document.getElementById('clearSelection').addEventListener('click', () => this.clearPropertySelection());
+                
+                // Charts
+                document.getElementById('refreshBookingsChart').addEventListener('click', () => this.refreshBookingsChart());
+                document.getElementById('refreshRevenueChart').addEventListener('click', () => this.refreshRevenueChart());
+                document.getElementById('exportRevenueData').addEventListener('click', () => this.exportRevenueData());
+                
+                // Other exports
+                document.getElementById('exportBookings').addEventListener('click', () => this.exportToCSV('bookings'));
+                document.getElementById('exportReviews').addEventListener('click', () => this.exportToCSV('reviews'));
+                document.getElementById('exportUsers').addEventListener('click', () => this.exportToCSV('users'));
+                
+                // Form validation
+                document.getElementById('addPropertyForm').addEventListener('submit', (e) => e.preventDefault());
+                document.getElementById('editPropertyForm').addEventListener('submit', (e) => e.preventDefault());
+                
+                // Booking filters
+                document.querySelectorAll('.filter-booking').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-booking').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.filterBookings(btn.dataset.status);
+                    });
+                });
+                
+                // Review filters
+                document.querySelectorAll('.filter-review').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-review').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.filterReviews(btn.dataset.rating);
+                    });
+                });
+                
+                // User search
+                document.getElementById('searchUsersBtn').addEventListener('click', () => {
+                    this.searchUsers(document.getElementById('userSearch').value);
+                });
+            },
+            
+            // Load keyboard shortcuts
+            loadKeyboardShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    // Only trigger if not in an input field
+                    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                        switch (e.key.toLowerCase()) {
+                            case 'd':
+                                document.querySelector('[href="#dashboard"]').click();
+                                break;
+                            case 'p':
+                                document.querySelector('[href="#properties"]').click();
+                                break;
+                            case 'b':
+                                document.querySelector('[href="#bookings"]').click();
+                                break;
+                            case 'r':
+                                document.querySelector('[href="#reviews"]').click();
+                                break;
+                            case 'u':
+                                document.querySelector('[href="#users"]').click();
+                                break;
+                            case 'l':
+                                document.getElementById('logout').click();
+                                break;
+                        }
+                    }
+                });
+            },
+            
+            // Show toast notification
+            showToast(message, type = 'success') {
+                Toastify({
+                    text: message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: type === 'success' ? "#1a6b1a" : 
+                                    type === 'error' ? "#dc3545" : 
+                                    type === 'warning' ? "#ffc107" : "#1a6b1a",
+                    stopOnFocus: true
+                }).showToast();
+            },
+            
+            // Show confirmation dialog
+            showConfirmation(title, text, confirmButtonText = 'Confirm') {
+                return Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1a6b1a',
+                    cancelButtonColor: '#dc3545',
+                    confirmButtonText: confirmButtonText
+                });
+            },
+            
+            // Save property
+            saveProperty() {
+                const btn = document.getElementById('savePropertyBtn');
+                const spinner = document.getElementById('savePropertySpinner');
+                
+                // Validate form
+                if (!this.validateForm('addPropertyForm')) {
+                    return;
+                }
+                
+                btn.disabled = true;
+                spinner.style.display = 'inline-block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    const property = {
+                        id: Date.now(),
+                        name: document.getElementById('propertyName').value.trim(),
+                        location: document.getElementById('propertyLocation').value.trim(),
+                        type: document.getElementById('propertyType').value,
+                        price: parseFloat(document.getElementById('propertyPrice').value),
+                        originalPrice: parseFloat(document.getElementById('propertyOriginalPrice').value) || null,
+                        bedrooms: parseInt(document.getElementById('propertyBedrooms').value),
+                        bathrooms: parseInt(document.getElementById('propertyBathrooms').value),
+                        description: document.getElementById('propertyDescription').value.trim(),
+                        amenities: this.getSelectedAmenities('add'),
+                        isNew: document.getElementById('propertyIsNew').checked,
+                        isPopular: document.getElementById('propertyIsPopular').checked,
+                        latitude: document.getElementById('propertyLatitude').value.trim(),
+                        longitude: document.getElementById('propertyLongitude').value.trim(),
+                        image: document.getElementById('propertyImagePreview').src || 'default-property.jpg',
+                        rating: 0,
+                        reviews: 0,
+                        addedDate: new Date().toISOString().split('T')[0],
+                        highlights: document.getElementById('propertyHighlights').value.split('\n').filter(h => h.trim() !== '')
+                    };
+
+                    const accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                    accommodations.push(property);
+                    localStorage.setItem('accommodations', JSON.stringify(accommodations));
+
+                    // Close modal and refresh
+                    bootstrap.Modal.getInstance(document.getElementById('addPropertyModal')).hide();
+                    this.showToast('Property added successfully!');
+                    this.loadPropertiesTable();
+                    this.loadDashboardData();
+                    this.initPropertyTypesChart();
+                    
+                    // Reset form
+                    document.getElementById('addPropertyForm').reset();
+                    document.getElementById('propertyImagePreview').style.display = 'none';
+                    
+                    btn.disabled = false;
+                    spinner.style.display = 'none';
+                }, 1000);
+            },
+            
+            // Edit property
+            editProperty(propertyId) {
+                const accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                const property = accommodations.find(p => p.id == propertyId);
+                
+                if (!property) {
+                    this.showToast('Property not found!', 'error');
+                    return;
+                }
+
+                // Populate the edit form
+                document.getElementById('editPropertyId').value = property.id;
+                document.getElementById('editPropertyName').value = property.name;
+                document.getElementById('editPropertyLocation').value = property.location;
+                document.getElementById('editPropertyType').value = property.type;
+                document.getElementById('editPropertyPrice').value = property.price;
+                document.getElementById('editPropertyOriginalPrice').value = property.originalPrice || '';
+                document.getElementById('editPropertyBedrooms').value = property.bedrooms;
+                document.getElementById('editPropertyBathrooms').value = property.bathrooms;
+                document.getElementById('editPropertyDescription').value = property.description;
+                document.getElementById('editPropertyLatitude').value = property.latitude || '';
+                document.getElementById('editPropertyLongitude').value = property.longitude || '';
+                document.getElementById('editPropertyIsNew').checked = property.isNew || false;
+                document.getElementById('editPropertyIsPopular').checked = property.isPopular || false;
+                document.getElementById('editPropertyHighlights').value = property.highlights?.join('\n') || '';
+                
+                // Set amenities checkboxes
+                document.getElementById('editAmenityWifi').checked = property.amenities?.includes('wifi') || false;
+                document.getElementById('editAmenityParking').checked = property.amenities?.includes('parking') || false;
+                document.getElementById('editAmenityPool').checked = property.amenities?.includes('pool') || false;
+                document.getElementById('editAmenityKitchen').checked = property.amenities?.includes('kitchen') || false;
+                
+                // Set image preview
+                const preview = document.getElementById('editPropertyImagePreview');
+                if (property.image) {
+                    preview.src = property.image;
+                    preview.style.display = 'block';
+                } else {
+                    preview.style.display = 'none';
+                }
+                
+                const modal = new bootstrap.Modal(document.getElementById('editPropertyModal'));
+                modal.show();
+            },
+            
+            // Update property
+            updateProperty() {
+                const btn = document.getElementById('updatePropertyBtn');
+                const spinner = document.getElementById('updatePropertySpinner');
+                
+                // Validate form
+                if (!this.validateForm('editPropertyForm')) {
+                    return;
+                }
+                
+                btn.disabled = true;
+                spinner.style.display = 'inline-block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    const propertyId = document.getElementById('editPropertyId').value;
+                    const accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                    const index = accommodations.findIndex(p => p.id == propertyId);
+                    
+                    if (index === -1) {
+                        this.showToast('Property not found!', 'error');
+                        btn.disabled = false;
+                        spinner.style.display = 'none';
+                        return;
+                    }
+
+                    // Update the property with form values
+                    accommodations[index] = {
+                        ...accommodations[index],
+                        name: document.getElementById('editPropertyName').value.trim(),
+                        location: document.getElementById('editPropertyLocation').value.trim(),
+                        type: document.getElementById('editPropertyType').value,
+                        price: parseFloat(document.getElementById('editPropertyPrice').value),
+                        originalPrice: parseFloat(document.getElementById('editPropertyOriginalPrice').value) || null,
+                        bedrooms: parseInt(document.getElementById('editPropertyBedrooms').value),
+                        bathrooms: parseInt(document.getElementById('editPropertyBathrooms').value),
+                        description: document.getElementById('editPropertyDescription').value.trim(),
+                        amenities: this.getSelectedAmenities('edit'),
+                        isNew: document.getElementById('editPropertyIsNew').checked,
+                        isPopular: document.getElementById('editPropertyIsPopular').checked,
+                        latitude: document.getElementById('editPropertyLatitude').value.trim(),
+                        longitude: document.getElementById('editPropertyLongitude').value.trim(),
+                        image: document.getElementById('editPropertyImagePreview').src || accommodations[index].image || 'default-property.jpg',
+                        highlights: document.getElementById('editPropertyHighlights').value.split('\n').filter(h => h.trim() !== '')
+                    };
+
+                    localStorage.setItem('accommodations', JSON.stringify(accommodations));
+                    
+                    // Close modal and refresh
+                    bootstrap.Modal.getInstance(document.getElementById('editPropertyModal')).hide();
+                    this.showToast('Property updated successfully!');
+                    this.loadPropertiesTable();
+                    this.loadDashboardData();
+                    this.initPropertyTypesChart();
+                    
+                    btn.disabled = false;
+                    spinner.style.display = 'none';
+                }, 1000);
+            },
+            
+            // Confirm delete property
+            confirmDeleteProperty() {
+                this.showConfirmation(
+                    'Delete Property', 
+                    'Are you sure you want to delete this property? This action cannot be undone.', 
+                    'Yes, delete it!'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        this.deleteProperty(document.getElementById('editPropertyId').value);
+                    }
+                });
+            },
+            
+            // Delete property
+            deleteProperty(propertyId) {
+                const btn = document.getElementById('deletePropertyBtn');
+                const spinner = document.getElementById('deletePropertySpinner');
+                
+                btn.disabled = true;
+                spinner.style.display = 'inline-block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    let accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                    accommodations = accommodations.filter(p => p.id != propertyId);
+                    localStorage.setItem('accommodations', JSON.stringify(accommodations));
+
+                    // Close modal if open
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editPropertyModal'));
+                    if (modal) modal.hide();
+
+                    this.showToast('Property deleted successfully!');
+                    this.loadPropertiesTable();
+                    this.loadDashboardData();
+                    this.initPropertyTypesChart();
+                    
+                    btn.disabled = false;
+                    spinner.style.display = 'none';
+                }, 1000);
+            },
+            
+            // Bulk delete properties
+            bulkDeleteProperties() {
+                const selectedIds = Array.from(document.querySelectorAll('.row-checkbox:checked'))
+                    .map(checkbox => checkbox.dataset.id);
+                
+                if (selectedIds.length === 0) {
+                    this.showToast('Please select at least one property to delete', 'warning');
+                    return;
+                }
+                
+                this.showConfirmation(
+                    'Delete Selected Properties', 
+                    `Are you sure you want to delete ${selectedIds.length} selected properties? This action cannot be undone.`, 
+                    'Yes, delete them!'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        const btn = document.getElementById('bulkDeleteProperties');
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+                        btn.disabled = true;
+                        
+                        // Simulate API call
+                        setTimeout(() => {
+                            let accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                            accommodations = accommodations.filter(p => !selectedIds.includes(p.id.toString()));
+                            localStorage.setItem('accommodations', JSON.stringify(accommodations));
+
+                            this.showToast(`${selectedIds.length} properties deleted successfully!`);
+                            this.loadPropertiesTable();
+                            this.loadDashboardData();
+                            this.initPropertyTypesChart();
+                            this.toggleBulkActions(false);
+                            
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                        }, 1500);
+                    }
+                });
+            },
+            
+            // Toggle select all properties
+            toggleSelectAllProperties(e) {
+                const checkboxes = document.querySelectorAll('.row-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = e.target.checked;
+                });
+                this.toggleBulkActions(e.target.checked);
+            },
+            
+            // Clear property selection
+            clearPropertySelection() {
+                document.getElementById('selectAllProperties').checked = false;
+                const checkboxes = document.querySelectorAll('.row-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                this.toggleBulkActions(false);
+            },
+            
+            // Toggle bulk actions visibility
+            toggleBulkActions(show) {
+                const bulkActions = document.getElementById('propertiesBulkActions');
+                bulkActions.style.display = show ? 'block' : 'none';
+            },
+            
+            // Preview property image
+            previewPropertyImage(event) {
+                const input = event.target;
+                const preview = document.getElementById('propertyImagePreview');
+                
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            },
+            
+            // Preview edit property image
+            previewEditPropertyImage(event) {
+                const input = event.target;
+                const preview = document.getElementById('editPropertyImagePreview');
+                
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            },
+            
+            // Get selected amenities
+            getSelectedAmenities(formType = 'add') {
+                const prefix = formType === 'add' ? '' : 'edit';
+                const amenities = [];
+                if (document.getElementById(`${prefix}amenityWifi`).checked) amenities.push('wifi');
+                if (document.getElementById(`${prefix}amenityParking`).checked) amenities.push('parking');
+                if (document.getElementById(`${prefix}amenityPool`).checked) amenities.push('pool');
+                if (document.getElementById(`${prefix}amenityKitchen`).checked) amenities.push('kitchen');
+                return amenities;
+            },
+            
+            // Validate form
+            validateForm(formId) {
+                let isValid = true;
+                const form = document.getElementById(formId);
+                const requiredFields = form.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+                
+                return isValid;
+            },
+            
+            // Export data to CSV
+            exportToCSV(dataType) {
+                let data = JSON.parse(localStorage.getItem(`${dataType}`)) || [];
+                let headers = [];
+                let rows = [];
+                
+                switch(dataType) {
+                    case 'accommodations':
+                        headers = ['ID', 'Name', 'Location', 'Type', 'Price', 'Bedrooms', 'Bathrooms', 'Rating'];
+                        rows = data.map(item => [
+                            item.id,
+                            `"${item.name}"`,
+                            item.location,
+                            item.type,
+                            item.price,
+                            item.bedrooms,
+                            item.bathrooms,
+                            item.rating || 0
+                        ]);
+                        break;
+                    case 'bookings':
+                        headers = ['ID', 'Property', 'Check In', 'Check Out', 'Guest', 'Email', 'Phone', 'Amount', 'Status'];
+                        rows = data.map(item => [
+                            item.id,
+                            `"${item.propertyName || this.getPropertyName(item.propertyId)}"`,
+                            item.checkIn,
+                            item.checkOut,
+                            `"${item.fullName}"`,
+                            item.email,
+                            item.phone,
+                            item.price,
+                            item.status || 'confirmed'
+                        ]);
+                        break;
+                    case 'reviews':
+                        headers = ['ID', 'Property', 'User', 'Rating', 'Review', 'Date'];
+                        rows = data.map(item => [
+                            item.id,
+                            `"${this.getPropertyName(item.propertyId)}"`,
+                            `"${item.name}"`,
+                            item.rating,
+                            `"${item.text || ''}"`,
+                            item.date
+                        ]);
+                        break;
+                    case 'users':
+                        headers = ['ID', 'Name', 'Email', 'Phone', 'Bookings', 'Join Date'];
+                        const users = JSON.parse(localStorage.getItem('users')) || [];
+                        rows = users.map(item => [
+                            item.id,
+                            `"${item.name} ${item.surname}"`,
+                            item.email,
+                            item.number || '',
+                            item.bookings || 0,
+                            item.joinDate || ''
+                        ]);
+                        break;
+                }
+                
+                const csvContent = [
+                    headers.join(','),
+                    ...rows.map(row => row.join(','))
+                ].join('\n');
+                
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                saveAs(blob, `${dataType}-export-${new Date().toISOString().slice(0,10)}.csv`);
+                
+                this.showToast(`${dataType} exported successfully!`);
+            },
+            
+            // Export revenue data
+            exportRevenueData() {
+                const data = this.revenueChart.data;
+                const headers = ['Month', 'Revenue (M)'];
+                const rows = data.labels.map((label, index) => [
+                    label,
+                    data.datasets[0].data[index]
+                ]);
+                
+                const csvContent = [
+                    headers.join(','),
+                    ...rows.map(row => row.join(','))
+                ].join('\n');
+                
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                saveAs(blob, `revenue-export-${new Date().toISOString().slice(0,10)}.csv`);
+                
+                this.showToast('Revenue data exported successfully!');
+            },
+            
+            // Refresh bookings chart
+            refreshBookingsChart() {
+                const btn = document.getElementById('refreshBookingsChart');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+                btn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In a real app, this would fetch new data from the server
+                    this.bookingsChart.data.datasets[0].data = [15, 12, 8, 10, 5, 7];
+                    this.bookingsChart.update();
+                    
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    this.showToast('Bookings chart refreshed!');
+                }, 1000);
+            },
+            
+            // Refresh revenue chart
+            refreshRevenueChart() {
+                const btn = document.getElementById('refreshRevenueChart');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+                btn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In a real app, this would fetch new data from the server
+                    this.revenueChart.data.datasets[0].data = [15000, 12000, 8000, 10000, 5000, 7000];
+                    this.revenueChart.update();
+                    
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    this.showToast('Revenue chart refreshed!');
+                }, 1000);
+            },
+            
+            // Get property name by ID
+            getPropertyName(propertyId) {
+                const accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                const property = accommodations.find(p => p.id == propertyId);
+                return property ? property.name : 'Unknown Property';
+            },
+            
+            // Render star ratings
+            renderStars(rating) {
+                let stars = '';
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 >= 0.5;
+                
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= fullStars) {
+                        stars += '<i class="fas fa-star text-warning"></i>';
+                    } else if (i === fullStars + 1 && hasHalfStar) {
+                        stars += '<i class="fas fa-star-half-alt text-warning"></i>';
+                    } else {
+                        stars += '<i class="far fa-star text-warning"></i>';
+                    }
+                }
+                return stars;
+            },
+            
+            // Load properties table
+            loadPropertiesTable() {
+                const accommodations = JSON.parse(localStorage.getItem('accommodations')) || [];
+                const tableBody = document.querySelector('#propertiesTable tbody');
+                
+                tableBody.innerHTML = accommodations.map(property => `
+                    <tr data-id="${property.id}">
+                        <td><input type="checkbox" class="row-checkbox" data-id="${property.id}"></td>
+                        <td><img src="${property.image || 'default-property.jpg'}" alt="${property.name}" style="width: 60px; height: 40px; object-fit: cover;"></td>
+                        <td>${property.name}</td>
+                        <td>${property.location}</td>
+                        <td>${property.type}</td>
+                        <td>M${property.price}</td>
+                        <td>${this.renderStars(property.rating || 0)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary edit-property" data-id="${property.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-property" data-id="${property.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // Add event listeners to action buttons
+                document.querySelectorAll('.edit-property').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const propertyId = btn.getAttribute('data-id');
+                        this.editProperty(propertyId);
+                    });
+                });
+
+                document.querySelectorAll('.delete-property').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const propertyId = btn.getAttribute('data-id');
+                        this.showConfirmation(
+                            'Delete Property', 
+                            'Are you sure you want to delete this property?', 
+                            'Yes, delete it!'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                this.deleteProperty(propertyId);
+                            }
+                        });
+                    });
+                });
+                
+                // Add event listeners to checkboxes
+                document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const anyChecked = document.querySelectorAll('.row-checkbox:checked').length > 0;
+                        this.toggleBulkActions(anyChecked);
+                        
+                        // Update "select all" checkbox
+                        const allChecked = document.querySelectorAll('.row-checkbox:checked').length === 
+                                          document.querySelectorAll('.row-checkbox').length;
+                        document.getElementById('selectAllProperties').checked = allChecked;
+                    });
+                });
+                
+                // Show empty state if no properties
+                if (accommodations.length === 0) {
+                    document.getElementById('propertiesEmptyState').style.display = 'block';
+                } else {
+                    document.getElementById('propertiesEmptyState').style.display = 'none';
+                }
+                
+                // Hide loading spinner
+                document.getElementById('propertiesLoading').style.display = 'none';
+            },
+            
+            // Load bookings table
+            loadBookingsTable() {
+                const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+                const tableBody = document.querySelector('#bookingsTable tbody');
+                
+                tableBody.innerHTML = bookings.map(booking => `
+                    <tr>
+                        <td>${booking.id || 'N/A'}</td>
+                        <td>${booking.propertyName || this.getPropertyName(booking.propertyId)}</td>
+                        <td>${booking.checkIn} to ${booking.checkOut}</td>
+                        <td>${booking.fullName}</td>
+                        <td>M${booking.price || 0}</td>
+                        <td><span class="badge ${booking.status === 'cancelled' ? 'bg-danger' : booking.status === 'pending' ? 'bg-warning' : 'bg-success'}">${booking.status || 'confirmed'}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-booking" data-id="${booking.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-booking').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const bookingId = btn.getAttribute('data-id');
+                        this.viewBooking(bookingId);
+                    });
+                });
+                
+                // Show empty state if no bookings
+                if (bookings.length === 0) {
+                    document.getElementById('bookingsEmptyState').style.display = 'block';
+                } else {
+                    document.getElementById('bookingsEmptyState').style.display = 'none';
+                }
+                
+                // Hide loading spinner
+                document.getElementById('bookingsLoading').style.display = 'none';
+            },
+            
+            // Load reviews table
+            loadReviewsTable() {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                const tableBody = document.querySelector('#reviewsTable tbody');
+                
+                tableBody.innerHTML = reviews.map(review => `
+                    <tr>
+                        <td>${this.getPropertyName(review.propertyId)}</td>
+                        <td>${review.name}</td>
+                        <td>${this.renderStars(review.rating)}</td>
+                        <td>${review.text ? review.text.substring(0, 50) + (review.text.length > 50 ? '...' : '') : ''}</td>
+                        <td>${review.date}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-review" data-id="${review.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-review').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const reviewId = btn.getAttribute('data-id');
+                        this.viewReview(reviewId);
+                    });
+                });
+                
+                // Show empty state if no reviews
+                if (reviews.length === 0) {
+                    document.getElementById('reviewsEmptyState').style.display = 'block';
+                } else {
+                    document.getElementById('reviewsEmptyState').style.display = 'none';
+                }
+                
+                // Hide loading spinner
+                document.getElementById('reviewsLoading').style.display = 'none';
+            },
+            
+            // Load users table
+            loadUsersTable() {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const tableBody = document.querySelector('#usersTable tbody');
+                
+                tableBody.innerHTML = users.map(user => `
+                    <tr>
+                        <td>${user.name} ${user.surname}</td>
+                        <td>${user.email}</td>
+                        <td>${user.number || 'N/A'}</td>
+                        <td>${user.bookings || 0}</td>
+                        <td>${user.joinDate || 'N/A'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-user" data-id="${user.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-user').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const userId = btn.getAttribute('data-id');
+                        this.viewUser(userId);
+                    });
+                });
+                
+                // Show empty state if no users
+                if (users.length === 0) {
+                    document.getElementById('usersEmptyState').style.display = 'block';
+                } else {
+                    document.getElementById('usersEmptyState').style.display = 'none';
+                }
+                
+                // Hide loading spinner
+                document.getElementById('usersLoading').style.display = 'none';
+            },
+            
+            // View booking details
+            viewBooking(bookingId) {
+                const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+                const booking = bookings.find(b => b.id == bookingId);
+                
+                if (!booking) {
+                    this.showToast('Booking not found!', 'error');
+                    return;
+                }
+                
+                const modalBody = document.querySelector('#viewBookingModal .modal-body');
+                modalBody.innerHTML = `
+                    <div class="mb-3">
+                        <h5>${booking.propertyName || this.getPropertyName(booking.propertyId)}</h5>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Dates:</strong> ${booking.checkIn} to ${booking.checkOut}</p>
+                        <p><strong>Guest:</strong> ${booking.fullName}</p>
+                        <p><strong>Email:</strong> ${booking.email}</p>
+                        <p><strong>Phone:</strong> ${booking.phone}</p>
+                        <p><strong>Guests:</strong> ${booking.guests || 'N/A'}</p>
+                        <p><strong>Amount:</strong> M${booking.price || 0}</p>
+                        <p><strong>Status:</strong> <span class="badge ${booking.status === 'cancelled' ? 'bg-danger' : booking.status === 'pending' ? 'bg-warning' : 'bg-success'}">${booking.status || 'confirmed'}</span></p>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Payment Method</h6>
+                        <p>${booking.payment?.method || 'N/A'}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Special Requests</h6>
+                        <p>${booking.specialRequests || 'None'}</p>
+                    </div>
+                `;
+                
+                const modal = new bootstrap.Modal(document.getElementById('viewBookingModal'));
+                modal.show();
+            },
+            
+            // View review details
+            viewReview(reviewId) {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                const review = reviews.find(r => r.id == reviewId);
+                
+                if (!review) {
+                    this.showToast('Review not found!', 'error');
+                    return;
+                }
+                
+                const modalBody = document.querySelector('#viewReviewModal .modal-body');
+                modalBody.innerHTML = `
+                    <div class="mb-3">
+                        <h5>${this.getPropertyName(review.propertyId)}</h5>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>User:</strong> ${review.name}</p>
+                        <p><strong>Rating:</strong> ${this.renderStars(review.rating)}</p>
+                        <p><strong>Date:</strong> ${review.date}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Review</h6>
+                        <p>${review.text || 'No review text provided.'}</p>
+                    </div>
+                `;
+                
+                const modal = new bootstrap.Modal(document.getElementById('viewReviewModal'));
+                modal.show();
+            },
+            
+            // View user details
+            viewUser(userId) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const user = users.find(u => u.id == userId);
+                
+                if (!user) {
+                    this.showToast('User not found!', 'error');
+                    return;
+                }
+                
+                const modalBody = document.querySelector('#viewUserModal .modal-body');
+                modalBody.innerHTML = `
+                    <div class="mb-3">
+                        <h5>${user.name} ${user.surname}</h5>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Phone:</strong> ${user.number || 'N/A'}</p>
+                        <p><strong>Bookings:</strong> ${user.bookings || 0}</p>
+                        <p><strong>Join Date:</strong> ${user.joinDate || 'N/A'}</p>
+                    </div>
+                `;
+                
+                const modal = new bootstrap.Modal(document.getElementById('viewUserModal'));
+                modal.show();
+            },
+            
+            // Filter bookings by status
+            filterBookings(status) {
+                const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+                let filteredBookings = bookings;
+                
+                if (status !== 'all') {
+                    filteredBookings = bookings.filter(booking => 
+                        (booking.status || 'confirmed').toLowerCase() === status.toLowerCase()
+                    );
+                }
+                
+                const tableBody = document.querySelector('#bookingsTable tbody');
+                tableBody.innerHTML = filteredBookings.map(booking => `
+                    <tr>
+                        <td>${booking.id || 'N/A'}</td>
+                        <td>${booking.propertyName || this.getPropertyName(booking.propertyId)}</td>
+                        <td>${booking.checkIn} to ${booking.checkOut}</td>
+                        <td>${booking.fullName}</td>
+                        <td>M${booking.price || 0}</td>
+                        <td><span class="badge ${booking.status === 'cancelled' ? 'bg-danger' : booking.status === 'pending' ? 'bg-warning' : 'bg-success'}">${booking.status || 'confirmed'}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-booking" data-id="${booking.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+            
+            // Filter reviews by rating
+            filterReviews(rating) {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                let filteredReviews = reviews;
+                
+                if (rating !== 'all') {
+                    filteredReviews = reviews.filter(review => 
+                        review.rating == parseInt(rating)
+                    );
+                }
+                
+                const tableBody = document.querySelector('#reviewsTable tbody');
+                tableBody.innerHTML = filteredReviews.map(review => `
+                    <tr>
+                        <td>${this.getPropertyName(review.propertyId)}</td>
+                        <td>${review.name}</td>
+                        <td>${this.renderStars(review.rating)}</td>
+                        <td>${review.text ? review.text.substring(0, 50) + (review.text.length > 50 ? '...' : '') : ''}</td>
+                        <td>${review.date}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-review" data-id="${review.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+            
+            // Search users
+            searchUsers(query) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                let filteredUsers = users;
+                
+                if (query.trim() !== '') {
+                    const searchTerm = query.toLowerCase();
+                    filteredUsers = users.filter(user => 
+                        user.name.toLowerCase().includes(searchTerm) ||
+                        user.surname.toLowerCase().includes(searchTerm) ||
+                        user.email.toLowerCase().includes(searchTerm) ||
+                        (user.number && user.number.includes(searchTerm))
+                    );
+                }
+                
+                const tableBody = document.querySelector('#usersTable tbody');
+                tableBody.innerHTML = filteredUsers.map(user => `
+                    <tr>
+                        <td>${user.name} ${user.surname}</td>
+                        <td>${user.email}</td>
+                        <td>${user.number || 'N/A'}</td>
+                        <td>${user.bookings || 0}</td>
+                        <td>${user.joinDate || 'N/A'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-user" data-id="${user.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+            
+            // Logout
+            logout() {
+                localStorage.removeItem('currentUser');
+                this.showToast('You have been logged out', 'info');
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+            }
+        };
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            AdminApp.init();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesotho Ideal Accommodations - Properties</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #1a6b1a, #0d4d0d);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            max-width: 1900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+            
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ddd;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard h2 {
+            color: #1a6b1a;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard ul {
+            list-style: none;
+        }
+        
+        .dashboard ul li {
+            padding: 10px;
+            background: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+        
+        .dashboard ul li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a6b1a;
+            font-size: 2rem;
+        }
+        
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(to right, #ff6b00, #ff4500);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 8px rgba(255, 107, 0, 0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Promo Sections */
+        .promo-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #1a6b1a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-title a {
+            font-size: 0.9rem;
+            color: #0d4d0d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .promo-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #1a6b1a #f5f5f5;
+        }
+        
+        .promo-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .promo-carousel::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        
+        .promo-carousel::-webkit-scrollbar-thumb {
+            background-color: #1a6b1a;
+            border-radius: 10px;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .filter-group select, 
+        .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input {
+            margin-right: 5px;
+        }
+        
+        .search-btn {
+            background: linear-gradient(to right, #1a6b1a, #0d4d0d);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            align-self: flex-end;
+            font-weight: bold;
+        }
+        
+        .search-btn:hover {
+            background: linear-gradient(to right, #0d4d0d, #1a6b1a);
+        }
+        
+        /* Accommodations Grid */
+        .accommodations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .accommodation-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .accommodation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Badges */
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4500;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .badge.new {
+            background-color: #007bff;
+        }
+        
+        .badge.discount {
+            background-color: #28a745;
+        }
+        
+        .badge.popular {
+            background-color: #6f42c1;
+        }
+        
+        /* Card Image */
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: 200px;
+            transition: transform 0.5s;
+        }
+        
+        .accommodation-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Card Details */
+        .card-details {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .card-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        .card-location i {
+            margin-right: 5px;
+            color: #1a6b1a;
+        }
+        
+        .card-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1a6b1a;
+            margin-bottom: 15px;
+        }
+        
+        .card-price span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        .card-price .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        
+        .card-price .discount-percentage {
+            color: #ff4500;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .card-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #555;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .card-features span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-features i {
+            margin-right: 5px;
+            color: #1a6b1a;
+        }
+        
+        .card-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .card-rating .stars {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        .card-rating .reviews {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Review Preview */
+        .review-preview {
+            margin: 15px 0;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .review {
+            margin-bottom: 15px;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .review-author {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .review-date {
+            color: #999;
+            font-size: 0.8rem;
+        }
+        
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .review-text {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .view-all-reviews {
+            color: #1a6b1a;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .view-all-reviews:hover {
+            text-decoration: underline;
+        }
+        
+        /* Card Buttons */
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .book-btn, .favorite-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .book-btn {
+            background: linear-gradient(to right, #1a6b1a, #0d4d0d);
+        }
+        
+        .book-btn:hover {
+            background: linear-gradient(to right, #0d4d0d, #1a6b1a);
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn {
+            background: linear-gradient(to right, #6c757d, #495057);
+        }
+        
+        .favorite-btn:hover {
+            background: linear-gradient(to right, #495057, #6c757d);
+            transform: translateY(-2px);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(to right, #ff4500, #ff8c00);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #1a6b1a, #0d4d0d);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #ddd;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ddd;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.3rem;
+            color: #1a6b1a;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        /* Reviews Modal */
+        .reviews-modal .modal-content {
+            max-width: 600px;
+        }
+        
+        .reviews-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .reviews-list .review {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .reviews-list .review:last-child {
+            border-bottom: none;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #1a6b1a, #0d4d0d);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #0d4d0d, #1a6b1a);
+        }
+        
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Payment Section */
+        .payment-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .payment-methods {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .payment-method {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .payment-method.active {
+            border-bottom-color: #1a6b1a;
+            color: #1a6b1a;
+            font-weight: bold;
+        }
+        
+        .payment-method:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+        
+        .payment-content {
+            display: none;
+        }
+        
+        .payment-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 25px;
+            background-color: #fff;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon i {
+            color: #555;
+            font-size: 1.2rem;
+        }
+        
+        .card-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .card-row .form-group {
+            flex: 1;
+        }
+        
+        .mobile-money-providers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .mobile-money-provider {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .mobile-money-provider.active {
+            border-color: #1a6b1a;
+            background-color: #f0f8f0;
+        }
+        
+        .mobile-money-provider i {
+            margin-right: 5px;
+        }
+        
+        .cash-payment-info {
+            padding: 15px;
+            background-color: #f0f8f0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .cash-payment-info i {
+            font-size: 2rem;
+            color: #1a6b1a;
+            margin-bottom: 10px;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Message notifications */
+        .message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .message.error {
+            background-color: #dc3545;
+        }
+        
+        .message.success {
+            background-color: #28a745;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav.active ul {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+                text-align: center;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                width: 100%;
+            }
+            
+            .accommodations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-buttons {
+                flex-direction: column;
+            }
+            
+            .card-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .payment-method {
+                border-bottom: 1px solid #ddd;
+                border-left: 3px solid transparent;
+            }
+            
+            .payment-method.active {
+                border-left-color: #1a6b1a;
+                border-bottom-color: #ddd;
+            }
+            
+            .promo-carousel {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h2 style = " color: white">Lesotho Ideal Accommodations</h1>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="accommodations.html" class="active">Properties</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="dashboard" id="dashboard">
+        <h2>Welcome, <span id="userName"></span>!</h2>
+        <h3>Your Booking History</h3>
+        <ul id="bookingHistory"></ul>
+        <h3>Your Favorites</h3>
+        <ul id="favoritesList"></ul>
+    </div>
+    
+    <main>
+        <h1 class="page-title">Find Your Perfect Accommodation</h1>
+        
+        <!-- Promotional Banner -->
+        <div class="promo-banner">
+            🎉 Black Friday Special! Up to 30% off selected properties. Book now! 🎉
+        </div>
+        
+        <!-- Latest Accommodations Section -->
+        <div class="promo-section">
+            <h2 class="section-title">Newly Added Properties <a href="#">View All</a></h2>
+            <div class="promo-carousel" id="newAccommodations"></div>
+        </div>
+        
+        <!-- Special Offers Section -->
+        <div class="promo-section">
+            <h2 class="section-title">Special Offers <a href="#">View All</a></h2>
+            <div class="promo-carousel" id="specialOffers"></div>
+        </div>
+        
+        <!-- Popular Properties Section -->
+        <div class="promo-section">
+            <h2 class="section-title">Most Popular Properties <a href="#">View All</a></h2>
+            <div class="promo-carousel" id="popularAccommodations"></div>
+        </div>
+        
+        <!-- Search Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="location">Location</label>
+                <select id="location">
+                    <option value="">All Locations</option>
+                    <option value="Maseru">Maseru</option>
+                    <option value="Mohale's Hoek">Mohale's Hoek</option>
+                    <option value="Teyateyaneng">Teyateyaneng</option>
+                    <option value="Leribe">Leribe</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="type">Property Type</label>
+                <select id="type">
+                    <option value="">All Types</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="House">House</option>
+                    <option value="Cottage">Cottage</option>
+                    <option value="Loft">Loft</option>
+                    <option value="Suite">Suite</option>
+                    <option value="Sesotho Hut">Traditional Sesotho Hut</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="price-range">Price Range</label>
+                <select id="price-range">
+                    <option value="">Any Price</option>
+                    <option value="0-1000">Under M1000</option>
+                    <option value="1000-1500">M1000 - M1500</option>
+                    <option value="1500-2000">M1500 - M2000</option>
+                    <option value="2000-9999">Over M2000</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Amenities</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="wifi" value="wifi"> <i class="fas fa-wifi"></i> WiFi</label>
+                    <label><input type="checkbox" name="parking" value="parking"> <i class="fas fa-parking"></i> Parking</label>
+                    <label><input type="checkbox" name="pool" value="pool"> <i class="fas fa-swimming-pool"></i> Pool</label>
+                    <label><input type="checkbox" name="kitchen" value="kitchen"> <i class="fas fa-utensils"></i> Kitchen</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="sort">Sort By</label>
+                <select id="sort">
+                    <option value="default">Default</option>
+                    <option value="price-low">Price (Low to High)</option>
+                    <option value="price-high">Price (High to Low)</option>
+                    <option value="rating">Rating</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+            <button class="search-btn" id="searchButton">Search</button>
+        </div>
+        
+        <div class="accommodations-grid" id="accommodations-container"></div>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="accommodations.html">Properties</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Short-term Rentals</a></li>
+                    <li><a href="#">Long-term Rentals</a></li>
+                    <li><a href="#">Property Management</a></li>
+                    <li><a href="#">Vacation Homes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Ha-Leqele, Maseru 100</li>
+                    <li><i class="fas fa-phone"></i> +266 57811397</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:lesothoidealaccomodation@gmail.com">lesothoidealaccomodation@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 Lesotho Ideal Accommodations. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Booking Modal -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Book Accommodation</h2>
+                <button class="close-btn" id="close-modal">×</button>
+            </div>
+            <form id="booking-form">
+                <input type="hidden" id="property-id">
+                <div class="form-group">
+                    <label for="property-name">Property</label>
+                    <input type="text" id="property-name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in Date</label>
+                    <input type="date" id="check-in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date</label>
+                    <input type="date" id="check-out" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" rows="3"></textarea>
+                </div>
+                
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-method="credit-card">Credit Card</div>
+                        <div class="payment-method" data-method="mobile-money">Mobile Money</div>
+                        <div class="payment-method" data-method="cash">Cash</div>
+                    </div>
+                    
+                    <div class="payment-content active" id="credit-card-content">
+                        <div class="card-icons">
+                            <div class="card-icon"><i class="fab fa-cc-visa"></i></div>
+                            <div class="card-icon"><i class="fab fa-cc-mastercard"></i></div>
+                            <div class="card-icon"><i class="fab fa-cc-amex"></i></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" pattern="[\d ]{16,19}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" required>
+                        </div>
+                        <div class="card-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiry Date</label>
+                                <input type="text" id="card-expiry" placeholder="MM/YY" pattern="\d{2}/\d{2}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">CVV</label>
+                                <input type="text" id="card-cvv" placeholder="123" pattern="\d{3,4}" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-content" id="mobile-money-content">
+                        <div class="mobile-money-providers">
+                            <div class="mobile-money-provider active" data-provider="mpesa">
+                                <i class="fas fa-mobile-alt"></i> M-Pesa
+                            </div>
+                            <div class="mobile-money-provider" data-provider="ecocash">
+                                <i class="fas fa-mobile-alt"></i> EcoCash
+                            </div>
+                            <div class="mobile-money-provider" data-provider="orange-money">
+                                <i class="fas fa-mobile-alt"></i> Orange Money
+                            </div>
+                        </div>
+                        <input type="hidden" id="mobile-money-provider" value="mpesa">
+                        <div class="form-group">
+                            <label for="mobile-money-number">Mobile Number</label>
+                            <input type="tel" id="mobile-money-number" placeholder="266 12345678" required>
+                        </div>
+                        <p style="font-size: 0.8rem; color: #666;">You'll receive a payment request on your mobile device</p>
+                    </div>
+                    
+                    <div class="payment-content" id="cash-content">
+                        <div class="cash-payment-info">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <p>Pay in cash when you arrive at the property. Please bring exact amount.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="puzzle" id="puzzle">
+                    <p>Solve this to book: <span id="puzzle-question"></span></p>
+                    <input type="number" id="puzzle-answer" required>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBookingBtn">Complete Booking</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Reviews Modal -->
+    <div class="modal reviews-modal" id="reviews-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Property Reviews</h2>
+                <button class="close-btn" id="close-reviews-modal">×</button>
+            </div>
+            <div class="reviews-list" id="reviews-list"></div>
+            <button class="close-btn submit-btn" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+    
+    <!-- Review Modal -->
+    <div class="modal review-modal" id="review-modal">
+        <div class="review-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Leave a Review</h2>
+                <button class="close-btn" id="close-review-modal">×</button>
+            </div>
+            <form id="review-form">
+                <input type="hidden" id="review-property-id">
+                <div class="form-group">
+                    <label for="review-property-name">Property</label>
+                    <input type="text" id="review-property-name" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Your Rating</label>
+                    <div class="rating-input">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="rating-value" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-title">Review Title</label>
+                    <input type="text" id="review-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Your Review</label>
+                    <textarea id="review-text" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitReviewBtn">Submit Review</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="message" class="message"></div>
+    
+    <script>
+        // Enhanced accommodations data with ratings, reviews, and promotions
+        const accommodations = [
+            { 
+                id: 1, 
+                name: "Avani Lesotho Hotel & Casino", 
+                location: "Maseru", 
+                price: 1800, 
+                originalPrice: 2200,
+                type: "Hotel", 
+                bedrooms: 1, 
+                bathrooms: 1, 
+                description: "4-star hotel in the heart of Maseru with modern amenities, a casino, and stunning city views. Ideal for business or leisure travelers.", 
+                image: "1.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "pool", "spa", "restaurant"],
+                rating: 4.5,
+                reviews: 86,
+                isNew: false,
+                discount: 18,
+                isPopular: true,
+                addedDate: "2023-09-10",
+                highlights: [
+                    "Luxury casino & entertainment",
+                    "Infinity pool with city views",
+                    "24/7 concierge service",
+                    "Fine dining restaurant",
+                    "Free high-speed WiFi"
+                ]
+            },
+            { 
+                id: 2, 
+                name: "Afriski Mountain Resort", 
+                location: "Maloti Mountains", 
+                price: 2500, 
+                type: "Resort", 
+                bedrooms: 2, 
+                bathrooms: 1, 
+                description: "Southern Africa's only ski resort, offering adventure sports year-round. Perfect for thrill-seekers and nature lovers.", 
+                image: "2.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "restaurant", "ski-rental", "sauna"],
+                rating: 4.7,
+                reviews: 124,
+                isNew: false,
+                isPopular: true,
+                addedDate: "2023-08-05",
+                highlights: [
+                    "Skiing & snowboarding (winter)",
+                    "Mountain biking (summer)",
+                    "Heated outdoor pool",
+                    "Après-ski bar",
+                    "Stargazing tours"
+                ]
+            },
+            { 
+                id: 3, 
+                name: "Malealea Lodge & Pony Trek Centre", 
+                location: "Malealea Valley", 
+                price: 950, 
+                originalPrice: 1200,
+                type: "Lodge", 
+                bedrooms: 1, 
+                bathrooms: 1, 
+                description: "Eco-friendly lodge offering authentic Basotho cultural experiences and scenic pony treks.", 
+                image: "3.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "restaurant", "guided-tours"],
+                rating: 4.6,
+                reviews: 72,
+                isNew: false,
+                discount: 21,
+                isPopular: true,
+                addedDate: "2023-07-20",
+                highlights: [
+                    "Traditional Basotho village tours",
+                    "Pony trekking adventures",
+                    "Handcrafted local cuisine",
+                    "Solar-powered eco-lodge",
+                    "Community-run projects"
+                ]
+            },
+            { 
+                id: 4, 
+                name: "Semonkong Lodge", 
+                location: "Semonkong", 
+                price: 1100, 
+                type: "Adventure Lodge", 
+                bedrooms: 1, 
+                bathrooms: 1, 
+                description: "Adventure base near Maletsunyane Falls, offering abseiling, hiking, and waterfall views.", 
+                image: "4.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "restaurant", "guided-tours"],
+                rating: 4.8,
+                reviews: 58,
+                isNew: true,
+                isPopular: false,
+                addedDate: "2023-11-15",
+                highlights: [
+                    "Abseiling down 204m waterfall",
+                    "Thatched-roof chalets",
+                    "Horseback riding trails",
+                    "Local craft brewery",
+                    "Campfire storytelling"
+                ]
+            },
+            { 
+                id: 5, 
+                name: "Katse Lodge", 
+                location: "Katse Dam", 
+                price: 1300, 
+                type: "Lodge", 
+                bedrooms: 2, 
+                bathrooms: 1, 
+                description: "Lakeside lodge with panoramic views of Katse Dam, ideal for engineering enthusiasts and nature lovers.", 
+                image: "5.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "restaurant", "boat-tours"],
+                rating: 4.4,
+                reviews: 42,
+                isNew: false,
+                isPopular: false,
+                addedDate: "2023-06-30",
+                highlights: [
+                    "Boat tours on Katse Dam",
+                    "Birdwatching paradise",
+                    "Dam engineering tours",
+                    "Cozy fireplace lounge",
+                    "Fresh trout dishes"
+                ]
+            },
+            { 
+                id: 6, 
+                name: "Thaba-Bosiu Cultural Village", 
+                location: "Thaba-Bosiu", 
+                price: 700, 
+                originalPrice: 850,
+                type: "Cultural Village", 
+                bedrooms: 1, 
+                bathrooms: 1, 
+                description: "Immerse in Basotho history with traditional huts and guided heritage tours at this UNESCO site.", 
+                image: "6.jpg", 
+                available: true,
+                amenities: ["parking", "guided-tours"],
+                rating: 4.3,
+                reviews: 35,
+                isNew: false,
+                discount: 18,
+                isPopular: false,
+                addedDate: "2023-05-12",
+                highlights: [
+                    "Historical tours of King Moshoeshoe's fortress",
+                    "Traditional dance performances",
+                    "Handmade craft workshops",
+                    "Sunset hikes to Thaba-Bosiu plateau",
+                    "Authentic Sesotho meals"
+                ]
+            },
+            { 
+                id: 7, 
+                name: "Mohale Lodge", 
+                location: "Mohale Dam", 
+                price: 1400, 
+                type: "Lodge", 
+                bedrooms: 2, 
+                bathrooms: 1, 
+                description: "Tranquil lakeside retreat with fishing, boating, and mountain views.", 
+                image: "7.jpg", 
+                available: true,
+                amenities: ["wifi", "parking", "restaurant", "boat-rental"],
+                rating: 4.2,
+                reviews: 29,
+                isNew: true,
+                isPopular: false,
+                addedDate: "2023-10-22",
+                highlights: [
+                    "Kayaking & fishing on Mohale Dam",
+                    "Private lakeside chalets",
+                    "Stargazing deck",
+                    "Hiking trails to rock art sites",
+                    "Freshwater seafood menu"
+                ]
+            },
+            { 
+                id: 8, 
+                name: "Sehlabathebe National Park Lodge", 
+                location: "Sehlabathebe", 
+                price: 600, 
+                type: "Wilderness Lodge", 
+                bedrooms: 1, 
+                bathrooms: 1, 
+                description: "Remote lodge in a UNESCO park, perfect for hikers and solitude seekers.", 
+                image: "1.jpg", 
+                available: true,
+                amenities: ["parking", "guided-tours"],
+                rating: 4.1,
+                reviews: 17,
+                isNew: false,
+                isPopular: false,
+                addedDate: "2023-04-18",
+                highlights: [
+                    "Ancient San rock art sites",
+                    "Privately guided hikes",
+                    "Wildflower meadows (spring)",
+                    "No light pollution (ideal for astrophotography)",
+                    "Self-catering cottages"
+                ]
+            }
+        ];
+        
+        // Reviews data with the specified names
+        const reviews = [
+            { id: 1, propertyId: 1, userId: 101, name: "Thabiso Thelingoane", rating: 5, title: "Absolutely breathtaking views!", text: "The mountain views from this apartment are even better than the photos. The place was clean, modern, and had everything we needed. Will definitely book again!", date: "2023-10-20" },
+            { id: 2, propertyId: 1, userId: 102, name: "Mohale Letsie", rating: 4, title: "Great stay overall", text: "Comfortable and well-located. The kitchen was fully equipped which was great for cooking our own meals. Only minor issue was the WiFi was a bit slow at times.", date: "2023-10-18" },
+            { id: 3, propertyId: 1, userId: 103, name: "Fani Maphasa", rating: 5, title: "Perfect getaway", text: "We stayed here for our anniversary and it was perfect. The balcony with mountain views was our favorite spot. Highly recommend!", date: "2023-10-15" },
+            
+            { id: 4, propertyId: 2, userId: 104, name: "Max Moloi", rating: 4, title: "Stylish and convenient", text: "The loft had a great modern design and was in the perfect location for exploring the city. The bed was very comfortable. Would stay again.", date: "2023-11-05" },
+            { id: 5, propertyId: 2, userId: 105, name: "Moabi Rantsebe", rating: 3, title: "Good but noisy", text: "The loft itself was nice but it was quite noisy at night due to the city center location. Bring earplugs if you're a light sleeper.", date: "2023-11-02" },
+            
+            { id: 6, propertyId: 3, userId: 106, name: "Ralitabo Bahlakoana", rating: 5, title: "Perfect family getaway", text: "The cottage was perfect for our family vacation. The kids loved playing by the lake and we enjoyed the peaceful surroundings. The kitchen had everything we needed.", date: "2023-09-25" },
+            { id: 7, propertyId: 3, userId: 107, name: "Khasu Keketso", rating: 5, title: "Peaceful retreat", text: "Exactly what we needed - a quiet place to relax by the water. The cottage was clean and comfortable. Would love to come back!", date: "2023-09-20" },
+            
+            { id: 8, propertyId: 4, userId: 101, name: "Thabiso Thelingoane", rating: 5, title: "Luxury at its best", text: "This suite exceeded all our expectations. The attention to detail was impressive - from the premium toiletries to the comfortable bedding. The pool was a great bonus!", date: "2023-08-15" },
+            { id: 9, propertyId: 4, userId: 104, name: "Max Moloi", rating: 4, title: "Excellent service", text: "The staff were incredibly helpful and the suite was spotless. Location was convenient for business meetings. Only reason not 5 stars is the price is quite high.", date: "2023-08-10" },
+            
+            { id: 10, propertyId: 5, userId: 102, name: "Mohale Letsie", rating: 4, title: "Great family home", text: "Plenty of space for our family of 5. The garden was perfect for the kids to play. Kitchen was well equipped. Would recommend for families.", date: "2023-11-12" },
+            
+            { id: 11, propertyId: 6, userId: 107, name: "Khasu Keketso", rating: 4, title: "Unique experience", text: "Staying in a traditional hut was a memorable experience. Very authentic and the hosts were wonderful. Not for those who need modern luxuries, but perfect for a cultural experience.", date: "2023-07-10" },
+            
+            { id: 12, propertyId: 7, userId: 103, name: "Fani Maphasa", rating: 5, title: "Absolutely stunning villa", text: "The views from this villa are incredible! Waking up to mountains every morning was magical. The pool was clean and refreshing. Worth every penny.", date: "2023-06-20" },
+            { id: 13, propertyId: 7, userId: 105, name: "Moabi Rantsebe", rating: 5, title: "Perfect in every way", text: "From the luxurious furnishings to the amazing views, this villa was perfect for our honeymoon. The staff were attentive without being intrusive.", date: "2023-06-18" },
+            
+            { id: 14, propertyId: 8, userId: 106, name: "Ralitabo Bahlakoana", rating: 3, title: "Good value", text: "For the price, this studio is a good option. Small but has everything you need. Location is very convenient for exploring the city.", date: "2023-11-08" }
+        ];
+        
+        // DOM elements
+        const accommodationsContainer = document.getElementById('accommodations-container');
+        const newAccommodationsContainer = document.getElementById('newAccommodations');
+        const specialOffersContainer = document.getElementById('specialOffers');
+        const popularAccommodationsContainer = document.getElementById('popularAccommodations');
+        const bookingModal = document.getElementById('booking-modal');
+        const reviewModal = document.getElementById('review-modal');
+        const reviewsModal = document.getElementById('reviews-modal');
+        const reviewsList = document.getElementById('reviews-list');
+        const closeModalBtn = document.getElementById('close-modal');
+        const closeReviewModalBtn = document.getElementById('close-review-modal');
+        const closeReviewsModalBtn = document.getElementById('close-reviews-modal');
+        const bookingForm = document.getElementById('booking-form');
+        const reviewForm = document.getElementById('review-form');
+        const propertyIdInput = document.getElementById('property-id');
+        const propertyNameInput = document.getElementById('property-name');
+        const reviewPropertyIdInput = document.getElementById('review-property-id');
+        const reviewPropertyNameInput = document.getElementById('review-property-name');
+        const searchButton = document.getElementById('searchButton');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'form.html';
+            } else {
+                document.getElementById('userName').textContent = currentUser.name;
+                displayAccommodations(accommodations);
+                displayNewAccommodations();
+                displaySpecialOffers();
+                displayPopularAccommodations();
+                displayBookingHistory();
+                displayFavorites();
+                resetTimeout();
+                document.addEventListener('mousemove', resetTimeout);
+                document.addEventListener('click', resetTimeout);
+            }
+
+            // Event listeners
+            document.getElementById('logout').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                window.location.href = 'form.html';
+            });
+            
+            searchButton.addEventListener('click', filterAccommodations);
+            closeModalBtn.addEventListener('click', closeBookingModal);
+            closeReviewModalBtn.addEventListener('click', closeReviewModal);
+            closeReviewsModalBtn.addEventListener('click', closeReviewsModal);
+            bookingForm.addEventListener('submit', handleBookingSubmit);
+            reviewForm.addEventListener('submit', handleReviewSubmit);
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === bookingModal) closeBookingModal();
+                if (e.target === reviewModal) closeReviewModal();
+                if (e.target === reviewsModal) closeReviewsModal();
+            });
+            
+            // Set min date for booking
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('check-in').min = today;
+            document.getElementById('check-in').addEventListener('change', function() {
+                document.getElementById('check-out').min = this.value;
+            });
+            
+            // Rating stars interaction
+            document.querySelectorAll('.rating-input i').forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    setRating(rating);
+                });
+            });
+            
+            // Payment method switching
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    // Update active tab
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update content
+                    const method = this.getAttribute('data-method');
+                    document.querySelectorAll('.payment-content').forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${method}-content`).classList.add('active');
+                });
+            });
+            
+            // Mobile money provider selection
+            document.querySelectorAll('.mobile-money-provider').forEach(provider => {
+                provider.addEventListener('click', function() {
+                    document.querySelectorAll('.mobile-money-provider').forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('mobile-money-provider').value = this.getAttribute('data-provider');
+                });
+            });
+            
+            // Format card number input
+            document.getElementById('card-number').addEventListener('input', function(e) {
+                let value = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formatted = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formatted += ' ';
+                    formatted += value[i];
+                }
+                this.value = formatted;
+            });
+            
+            // Format expiry date input
+            document.getElementById('card-expiry').addEventListener('input', function(e) {
+                let value = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                this.value = value;
+            });
+
+            // Event delegation for dynamic elements
+            document.addEventListener('click', function(e) {
+                // Handle book buttons
+                if (e.target.classList.contains('book-btn') || e.target.closest('.book-btn')) {
+                    const btn = e.target.classList.contains('book-btn') ? e.target : e.target.closest('.book-btn');
+                    openBookingModal(btn.getAttribute('data-id'));
+                }
+                
+                // Handle favorite buttons
+                if (e.target.classList.contains('favorite-btn') || e.target.closest('.favorite-btn')) {
+                    const btn = e.target.classList.contains('favorite-btn') ? e.target : e.target.closest('.favorite-btn');
+                    toggleFavorite(btn.getAttribute('data-id'), btn);
+                }
+                
+                // Handle view all reviews buttons
+                if (e.target.classList.contains('view-all-reviews') || e.target.closest('.view-all-reviews')) {
+                    const btn = e.target.classList.contains('view-all-reviews') ? e.target : e.target.closest('.view-all-reviews');
+                    showAllReviews(btn.getAttribute('data-property-id'));
+                }
+            });
+        });
+        
+        // Helper functions
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.opacity = '1';
+            setTimeout(() => messageDiv.style.opacity = '0', 3000);
+        }
+
+        function showLoading(btnId) {
+            const submitBtn = document.getElementById(btnId);
+            submitBtn.innerHTML = '<span class="spinner"></span> Processing...';
+            submitBtn.disabled = true;
+        }
+
+        function hideLoading(btnId, originalText) {
+            const submitBtn = document.getElementById(btnId);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+
+        function saveBooking(booking) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                    bookings.push(booking);
+                    localStorage.setItem('bookings', JSON.stringify(bookings));
+                    resolve();
+                }, 1500); // Simulate processing delay
+            });
+        }
+
+        function saveFavorite(propertyId) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                    if (!currentUser.favorites) currentUser.favorites = [];
+                    if (!currentUser.favorites.includes(propertyId)) {
+                        currentUser.favorites.push(propertyId);
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    }
+                    resolve();
+                }, 500);
+            });
+        }
+
+        function removeFavorite(propertyId) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                    currentUser.favorites = currentUser.favorites.filter(id => id !== propertyId);
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    resolve();
+                }, 500);
+            });
+        }
+
+        function saveReview(review) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    let allReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+                    review.id = allReviews.length + 1;
+                    review.date = new Date().toISOString().split('T')[0];
+                    allReviews.push(review);
+                    localStorage.setItem('reviews', JSON.stringify(allReviews));
+                    
+                    // Update accommodation rating
+                    const propertyReviews = allReviews.filter(r => r.propertyId === review.propertyId);
+                    const newRating = propertyReviews.reduce((sum, r) => sum + r.rating, 0) / propertyReviews.length;
+                    
+                    let accommodationsData = JSON.parse(localStorage.getItem('accommodations') || JSON.stringify(accommodations));
+                    const accIndex = accommodationsData.findIndex(a => a.id === review.propertyId);
+                    if (accIndex !== -1) {
+                        accommodationsData[accIndex].rating = newRating;
+                        accommodationsData[accIndex].reviews = propertyReviews.length;
+                        localStorage.setItem('accommodations', JSON.stringify(accommodationsData));
+                    }
+                    
+                    resolve();
+                }, 500);
+            });
+        }
+
+        function renderStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            return stars;
+        }
+
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.rating-input i');
+            stars.forEach(star => {
+                const starRating = parseInt(star.getAttribute('data-rating'));
+                if (starRating <= rating) {
+                    star.classList.add('active');
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('active');
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+            document.getElementById('rating-value').value = rating;
+        }
+
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+        }
+
+        function getReviewsForProperty(propertyId) {
+            return reviews.filter(r => r.propertyId == propertyId);
+        }
+
+        // Display functions
+        function displayAccommodations(accommodationsToDisplay) {
+            accommodationsContainer.innerHTML = '';
+            if (accommodationsToDisplay.length === 0) {
+                accommodationsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 20px;">No accommodations found matching your criteria.</p>';
+                return;
+            }
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favorites = currentUser.favorites || [];
+            
+            accommodationsToDisplay.forEach(accommodation => {
+                const card = document.createElement('div');
+                card.className = 'accommodation-card';
+                const isFavorite = favorites.includes(accommodation.id);
+                
+                // Add badge if property is new, has discount, or is popular
+                let badge = '';
+                if (accommodation.isNew) {
+                    badge = '<span class="badge new">NEW</span>';
+                } else if (accommodation.discount) {
+                    badge = `<span class="badge discount">-${accommodation.discount}%</span>`;
+                } else if (accommodation.isPopular) {
+                    badge = '<span class="badge popular">POPULAR</span>';
+                }
+                
+                // Price display
+                let priceDisplay = `<div class="card-price">M${accommodation.price} <span>/month</span></div>`;
+                if (accommodation.originalPrice) {
+                    priceDisplay = `
+                        <div class="card-price">
+                            <span class="original-price">M${accommodation.originalPrice}</span>
+                            M${accommodation.price} <span>/month</span>
+                            <span class="discount-percentage">(${accommodation.discount}% OFF)</span>
+                        </div>
+                    `;
+                }
+                
+                // Get reviews for this property
+                const propertyReviews = getReviewsForProperty(accommodation.id).slice(0, 1);
+                
+                card.innerHTML = `
+                    ${badge}
+                    <div class="card-image">
+                        <img src="${accommodation.image}" alt="${accommodation.name}" loading="lazy">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">${accommodation.name}</h3>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i> ${accommodation.location}
+                        </div>
+                        ${priceDisplay}
+                        <div class="card-rating">
+                            <div class="stars">${renderStars(accommodation.rating)}</div>
+                            <div class="reviews">(${accommodation.reviews})</div>
+                        </div>
+                        <div class="card-features">
+                            <span><i class="fas fa-home"></i> ${accommodation.type}</span>
+                            <span><i class="fas fa-bed"></i> ${accommodation.bedrooms} beds</span>
+                            <span><i class="fas fa-bath"></i> ${accommodation.bathrooms} baths</span>
+                        </div>
+                        
+                        <div class="card-highlights">
+                            <h4>Highlights</h4>
+                            <ul>
+                                ${accommodation.highlights.map(highlight => `<li><i class="fas fa-check"></i> ${highlight}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <p class="card-description">${accommodation.description}</p>
+                        
+                        ${propertyReviews.length > 0 ? `
+                        <div class="review-preview">
+                            <div class="review">
+                                <div class="review-header">
+                                    <span class="review-author">${propertyReviews[0].name}</span>
+                                    <span class="review-date">${propertyReviews[0].date}</span>
+                                </div>
+                                <div class="review-rating">${renderStars(propertyReviews[0].rating)}</div>
+                                <div class="review-title">${propertyReviews[0].title}</div>
+                                <p class="review-text">${propertyReviews[0].text}</p>
+                            </div>
+                            <button class="view-all-reviews" data-property-id="${accommodation.id}">View all ${accommodation.reviews} reviews</button>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="card-buttons">
+                            <button class="book-btn" data-id="${accommodation.id}">Book Now</button>
+                            <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${accommodation.id}">
+                                ${isFavorite ? '<i class="fas fa-heart"></i> Saved' : '<i class="far fa-heart"></i> Save'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                accommodationsContainer.appendChild(card);
+            });
+        }
+        
+        function showAllReviews(propertyId) {
+            const property = accommodations.find(a => a.id == propertyId);
+            const propertyReviews = getReviewsForProperty(propertyId);
+            
+            reviewsList.innerHTML = `
+                <h3 style="margin-bottom: 20px;">${property.name} - Reviews</h3>
+                ${propertyReviews.map(review => `
+                    <div class="review">
+                        <div class="review-header">
+                            <span class="review-author">${review.name}</span>
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                        <div class="review-rating">${renderStars(review.rating)}</div>
+                        <div class="review-title">${review.title}</div>
+                        <p class="review-text">${review.text}</p>
+                    </div>
+                `).join('')}
+            `;
+            
+            reviewsModal.style.display = 'flex';
+        }
+        
+        function displayNewAccommodations() {
+            // Get accommodations added in the last 30 days
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            
+            const newAccommodations = accommodations.filter(acc => {
+                const addedDate = new Date(acc.addedDate);
+                return addedDate >= thirtyDaysAgo;
+            }).sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate)).slice(0, 5);
+            
+            newAccommodationsContainer.innerHTML = '';
+            
+            if (newAccommodations.length === 0) {
+                newAccommodationsContainer.innerHTML = '<p>No new accommodations recently.</p>';
+                return;
+            }
+            
+            newAccommodations.forEach(accommodation => {
+                const card = document.createElement('div');
+                card.className = 'accommodation-card';
+                card.style.minWidth = '250px';
+                
+                card.innerHTML = `
+                    <span class="badge new">NEW</span>
+                    <div class="card-image">
+                        <img src="${accommodation.image}" alt="${accommodation.name}" loading="lazy">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">${accommodation.name}</h3>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i> ${accommodation.location}
+                        </div>
+                        <div class="card-price">M${accommodation.price} <span>/month</span></div>
+                        <button class="book-btn" data-id="${accommodation.id}">Book Now</button>
+                    </div>
+                `;
+                
+                newAccommodationsContainer.appendChild(card);
+            });
+        }
+        
+        function displaySpecialOffers() {
+            const specialOffers = accommodations.filter(acc => acc.discount).slice(0, 5);
+            
+            specialOffersContainer.innerHTML = '';
+            
+            if (specialOffers.length === 0) {
+                specialOffersContainer.innerHTML = '<p>No special offers currently available.</p>';
+                return;
+            }
+            
+            specialOffers.forEach(accommodation => {
+                const card = document.createElement('div');
+                card.className = 'accommodation-card';
+                card.style.minWidth = '250px';
+                
+                card.innerHTML = `
+                    <span class="badge discount">-${accommodation.discount}%</span>
+                    <div class="card-image">
+                        <img src="${accommodation.image}" alt="${accommodation.name}" loading="lazy">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">${accommodation.name}</h3>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i> ${accommodation.location}
+                        </div>
+                        <div class="card-price">
+                            <span class="original-price">M${accommodation.originalPrice}</span>
+                            M${accommodation.price} <span>/month</span>
+                        </div>
+                        <button class="book-btn" data-id="${accommodation.id}">Book Now</button>
+                    </div>
+                `;
+                
+                specialOffersContainer.appendChild(card);
+            });
+        }
+        
+        function displayPopularAccommodations() {
+            const popularAccommodations = accommodations.filter(acc => acc.isPopular).slice(0, 5);
+            
+            popularAccommodationsContainer.innerHTML = '';
+            
+            if (popularAccommodations.length === 0) {
+                popularAccommodationsContainer.innerHTML = '<p>No popular accommodations to show.</p>';
+                return;
+            }
+            
+            popularAccommodations.forEach(accommodation => {
+                const card = document.createElement('div');
+                card.className = 'accommodation-card';
+                card.style.minWidth = '250px';
+                
+                card.innerHTML = `
+                    <span class="badge popular">POPULAR</span>
+                    <div class="card-image">
+                        <img src="${accommodation.image}" alt="${accommodation.name}" loading="lazy">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">${accommodation.name}</h3>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i> ${accommodation.location}
+                        </div>
+                        <div class="card-price">M${accommodation.price} <span>/month</span></div>
+                        <button class="book-btn" data-id="${accommodation.id}">Book Now</button>
+                    </div>
+                `;
+                
+                popularAccommodationsContainer.appendChild(card);
+            });
+        }
+        
+        function displayBookingHistory() {
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            const bookingHistory = document.getElementById('bookingHistory');
+            bookingHistory.innerHTML = '';
+            
+            if (bookings.length === 0) {
+                bookingHistory.innerHTML = '<li>No booking history yet.</li>';
+                return;
+            }
+            
+            bookings.forEach(booking => {
+                const li = document.createElement('li');
+                li.textContent = `${booking.propertyName} - ${booking.checkIn} to ${booking.checkOut}`;
+                bookingHistory.appendChild(li);
+            });
+        }
+        
+        function displayFavorites() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favorites = currentUser?.favorites || [];
+            const favoritesList = document.getElementById('favoritesList');
+            favoritesList.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<li>No favorites added yet.</li>';
+                return;
+            }
+            
+            favorites.forEach(id => {
+                const acc = accommodations.find(a => a.id === id);
+                if (acc) {
+                    const li = document.createElement('li');
+                    li.textContent = `${acc.name} - ${acc.location}`;
+                    favoritesList.appendChild(li);
+                }
+            });
+        }
+        
+        // Modal functions
+        function openBookingModal(id) {
+            const accommodation = accommodations.find(acc => acc.id == id);
+            if (accommodation) {
+                propertyIdInput.value = accommodation.id;
+                propertyNameInput.value = accommodation.name;
+                
+                // Generate a simple math puzzle
+                const a = Math.floor(Math.random() * 10);
+                const b = Math.floor(Math.random() * 10);
+                document.getElementById('puzzle-question').textContent = `${a} + ${b} = ?`;
+                document.getElementById('puzzle-answer').dataset.correct = a + b;
+                
+                // Pre-fill user details if available
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    document.getElementById('full-name').value = `${currentUser.name} ${currentUser.surname}`;
+                    document.getElementById('email').value = currentUser.email;
+                    document.getElementById('phone').value = currentUser.number;
+                }
+                
+                // Reset payment method to credit card
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                document.querySelector('[data-method="credit-card"]').classList.add('active');
+                document.querySelectorAll('.payment-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('credit-card-content').classList.add('active');
+                
+                bookingModal.style.display = 'flex';
+            }
+        }
+        
+        function closeBookingModal() {
+            bookingModal.style.display = 'none';
+            bookingForm.reset();
+        }
+        
+        function closeReviewsModal() {
+            reviewsModal.style.display = 'none';
+        }
+        
+        function openReviewModal(id, name) {
+            reviewPropertyIdInput.value = id;
+            reviewPropertyNameInput.value = name;
+            
+            // Reset rating stars
+            document.querySelectorAll('.rating-input i').forEach(star => {
+                star.classList.remove('fas', 'active');
+                star.classList.add('far');
+            });
+            document.getElementById('rating-value').value = '';
+            
+            reviewModal.style.display = 'flex';
+        }
+        
+        function closeReviewModal() {
+            reviewModal.style.display = 'none';
+            reviewForm.reset();
+        }
+        
+        // Interaction functions
+        function toggleFavorite(id, button) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favorites = currentUser.favorites || [];
+            
+            if (favorites.includes(Number(id))) {
+                removeFavorite(Number(id)).then(() => {
+                    button.innerHTML = '<i class="far fa-heart"></i> Save';
+                    button.classList.remove('active');
+                    displayFavorites();
+                    showMessage('Removed from favorites', 'success');
+                });
+            } else {
+                saveFavorite(Number(id)).then(() => {
+                    button.innerHTML = '<i class="fas fa-heart"></i> Saved';
+                    button.classList.add('active');
+                    displayFavorites();
+                    showMessage('Added to favorites', 'success');
+                });
+            }
+        }
+        
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            showLoading('submitBookingBtn');
+            
+            // Verify puzzle answer
+            const puzzleAnswer = Number(document.getElementById('puzzle-answer').value);
+            const correctAnswer = Number(document.getElementById('puzzle-answer').dataset.correct);
+            
+            if (puzzleAnswer !== correctAnswer) {
+                hideLoading('submitBookingBtn', 'Complete Booking');
+                showMessage('Incorrect puzzle answer! Try again.', 'error');
+                return;
+            }
+            
+            // Get selected payment method
+            const paymentMethod = document.querySelector('.payment-method.active').getAttribute('data-method');
+            let paymentDetails = {};
+            
+            if (paymentMethod === 'credit-card') {
+                const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '');
+                if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
+                    hideLoading('submitBookingBtn', 'Complete Booking');
+                    showMessage('Please enter a valid 16-digit card number', 'error');
+                    return;
+                }
+                
+                const expiry = document.getElementById('card-expiry').value;
+                if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                    hideLoading('submitBookingBtn', 'Complete Booking');
+                    showMessage('Please enter a valid expiry date (MM/YY)', 'error');
+                    return;
+                }
+                
+                const cvv = document.getElementById('card-cvv').value;
+                if (!/^\d{3,4}$/.test(cvv)) {
+                    hideLoading('submitBookingBtn', 'Complete Booking');
+                    showMessage('Please enter a valid CVV (3 or 4 digits)', 'error');
+                    return;
+                }
+                
+                paymentDetails = {
+                    method: 'credit-card',
+                    last4: cardNumber.slice(-4),
+                    cardType: cardNumber.startsWith('4') ? 'visa' : cardNumber.startsWith('5') ? 'mastercard' : 'other'
+                };
+            } else if (paymentMethod === 'mobile-money') {
+                const mobileNumber = document.getElementById('mobile-money-number').value;
+                if (!mobileNumber) {
+                    hideLoading('submitBookingBtn', 'Complete Booking');
+                    showMessage('Please enter your mobile number', 'error');
+                    return;
+                }
+                
+                paymentDetails = {
+                    method: 'mobile-money',
+                    provider: document.getElementById('mobile-money-provider').value,
+                    number: mobileNumber
+                };
+            } else {
+                paymentDetails = {
+                    method: 'cash'
+                };
+            }
+            
+            const bookingData = {
+                propertyId: propertyIdInput.value,
+                propertyName: propertyNameInput.value,
+                checkIn: document.getElementById('check-in').value,
+                checkOut: document.getElementById('check-out').value,
+                guests: document.getElementById('guests').value,
+                fullName: document.getElementById('full-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                specialRequests: document.getElementById('special-requests').value,
+                payment: paymentDetails,
+                dateBooked: new Date().toISOString()
+            };
+            
+            saveBooking(bookingData).then(() => {
+                hideLoading('submitBookingBtn', 'Complete Booking');
+                showMessage(`Booking confirmed for ${bookingData.propertyName} from ${bookingData.checkIn} to ${bookingData.checkOut}!`, 'success');
+                displayBookingHistory();
+                bookingForm.reset();
+                closeBookingModal();
+            }).catch(error => {
+                hideLoading('submitBookingBtn', 'Complete Booking');
+                showMessage('An error occurred during booking. Please try again.', 'error');
+                console.error('Booking error:', error);
+            });
+        }
+        
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            showLoading('submitReviewBtn');
+            
+            const rating = document.getElementById('rating-value').value;
+            if (!rating) {
+                hideLoading('submitReviewBtn', 'Submit Review');
+                showMessage('Please select a rating', 'error');
+                return;
+            }
+            
+            const reviewData = {
+                propertyId: parseInt(reviewPropertyIdInput.value),
+                userId: JSON.parse(localStorage.getItem('currentUser')).id,
+                rating: parseInt(rating),
+                title: document.getElementById('review-title').value,
+                text: document.getElementById('review-text').value
+            };
+            
+            if (!reviewData.title || !reviewData.text) {
+                hideLoading('submitReviewBtn', 'Submit Review');
+                showMessage('Please fill in all review fields', 'error');
+                return;
+            }
+            
+            saveReview(reviewData).then(() => {
+                hideLoading('submitReviewBtn', 'Submit Review');
+                showMessage('Thank you for your review!', 'success');
+                displayAccommodations(accommodations); // Refresh to show updated ratings
+                reviewForm.reset();
+                closeReviewModal();
+            }).catch(error => {
+                hideLoading('submitReviewBtn', 'Submit Review');
+                showMessage('An error occurred while saving your review. Please try again.', 'error');
+                console.error('Review error:', error);
+            });
+        }
+        
+        // Filter and search functions
+        function filterAccommodations() {
+            const locationFilter = document.getElementById('location').value.toLowerCase();
+            const typeFilter = document.getElementById('type').value.toLowerCase();
+            const priceFilter = document.getElementById('price-range').value;
+            const amenitiesCheckboxes = document.querySelectorAll('.checkbox-group input:checked');
+            const amenitiesFilter = Array.from(amenitiesCheckboxes).map(cb => cb.value);
+            const sortFilter = document.getElementById('sort').value;
+            
+            let filtered = [...accommodations];
+            
+            // Apply filters
+            if (locationFilter) {
+                filtered = filtered.filter(acc => acc.location.toLowerCase().includes(locationFilter));
+            }
+            
+            if (typeFilter) {
+                filtered = filtered.filter(acc => acc.type.toLowerCase().includes(typeFilter));
+            }
+            
+            if (priceFilter) {
+                const [min, max] = priceFilter.split('-').map(Number);
+                filtered = filtered.filter(acc => acc.price >= min && acc.price <= max);
+            }
+            
+            if (amenitiesFilter.length > 0) {
+                filtered = filtered.filter(acc => 
+                    amenitiesFilter.every(amenity => acc.amenities.includes(amenity))
+                );
+            }
+            
+            // Apply sorting
+            switch (sortFilter) {
+                case 'price-low':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    filtered.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'newest':
+                    filtered.sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate));
+                    break;
+                default:
+                    // Default sorting (maybe by ID or keep original order)
+                    break;
+            }
+            
+            displayAccommodations(filtered);
+        }
+        
+        // Session timeout
+        let timeout;
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                localStorage.removeItem('currentUser');
+                showMessage('Session timed out. Please log in again.', 'error');
+                setTimeout(() => window.location.href = 'form.html', 1000);
+            }, 30 * 60 * 1000); // 30 minutes
+        }
+    </script>
+</body>
+</html>

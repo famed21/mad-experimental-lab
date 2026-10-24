@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            border-style: outset;
+            border-color: green;
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: green;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            color: #333333;
+        }
+        input[type="submit"] {
+            background: linear-gradient(to right, green, darkgreen);
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #0056b3, #003d82);
+        }
+        input[type="submit"]:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            color: green;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+        }
+        .nav-links a {
+            color: green;
+            font-size: 1rem;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            transform: scale(1.1);
+        }
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: green;
+            cursor: pointer;
+        }
+        .message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+        .message.error {
+            background-color: red;
+        }
+        .message.success {
+            background-color: green;
+        }
+        .validation-message {
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        @media screen and (max-width: 480px) {
+            .container {
+                max-width: 300px;
+                margin: 50px auto;
+                padding: 10px;
+            }
+            form {
+                order: -1;
+            }
+            input[type="text"],
+            input[type="number"],
+            input[type="email"],
+            input[type="password"],
+            input[type="submit"] {
+                margin-bottom: 10px;
+            }
+            .nav-links {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 10px;
+                display: none;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .nav-links a {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-btn" onclick="toggleMenu()">Menu</button>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="container">
+        <form id="registerForm">
+            <h2>Create New Account</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Thabiso" required>
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" placeholder="Thelingoane" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="lesothoidealaccomodation@gmail.com" required>
+            <div id="email-validation" class="validation-message"></div>
+            <label for="number">Phone Number:</label>
+            <input type="number" id="number" name="number" placeholder="26657811397" required>
+            <label for="password">Password (at least one character, one number, and "@"):</label>
+            <input type="password" id="password" name="password" pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@]).{8,}" 
+                   title="Password must contain at least one letter, one number, and '@' symbol, & be at least 8 characters long" 
+                   required placeholder="thelingoane21@">
+            <input type="submit" value="Create Account" id="submitBtn">
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="form.html">Login here</a>.</p>
+        </div>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+                <img src="twitter.png" alt="Twitter">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank">
+                <img src="tiktok.png" alt="Tiktok">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <script>
+        function toggleMenu() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.opacity = '1';
+            setTimeout(() => messageDiv.style.opacity = '0', 3000);
+        }
+
+        function showLoading() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.value = 'Loading...';
+            submitBtn.disabled = true;
+        }
+
+        function hideLoading() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.value = 'Create Account';
+            submitBtn.disabled = false;
+        }
+
+        // Simulated password hashing (Base64)
+        function hashPassword(password) {
+            return btoa(password); // Simple Base64 encoding
+        }
+
+        function unhashPassword(hashed) {
+            return atob(hashed); // Decode Base64
+        }
+
+        // Simulated API call
+        function saveUser(user) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    let database = JSON.parse(localStorage.getItem('database') || '[]');
+                    database.push(user);
+                    localStorage.setItem('database', JSON.stringify(database));
+                    resolve();
+                }, 500);
+            });
+        }
+
+        // Real-time email validation
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value;
+            const database = JSON.parse(localStorage.getItem('database') || '[]');
+            const validationDiv = document.getElementById('email-validation');
+            if (database.some(u => u.email === email)) {
+                validationDiv.textContent = 'Email already taken';
+                validationDiv.style.color = 'red';
+                this.style.borderColor = 'red';
+            } else {
+                validationDiv.textContent = 'Email available';
+                validationDiv.style.color = 'green';
+                this.style.borderColor = 'green';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showLoading();
+
+            const user = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                email: document.getElementById('email').value,
+                number: document.getElementById('number').value,
+                password: hashPassword(document.getElementById('password').value)
+            };
+
+            let database = JSON.parse(localStorage.getItem('database') || '[]');
+            if (database.some(u => u.email === user.email)) {
+                hideLoading();
+                showMessage('Email already registered!', 'error');
+                return;
+            }
+
+            saveUser(user).then(() => {
+                const txtFormat = `Name: ${user.name}, Surname: ${user.surname}, Email: ${user.email}, Phone: ${user.number}, Password: [hashed]\n`;
+                console.log('Database.txt entry:', txtFormat);
+                hideLoading();
+                showMessage('Account created successfully!', 'success');
+                this.reset();
+                setTimeout(() => window.location.href = 'form.html', 1000);
+            });
+        });
+    </script>
+</body>
+</html>
